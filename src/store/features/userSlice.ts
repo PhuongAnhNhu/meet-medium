@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface UserState {
   email: string;
+  isLoggedIn: boolean;
 }
 
 const initialState: UserState = {
   email: '',
+  isLoggedIn: false,
 };
 
 // const login = createAsyncThunk('users/login', async (userId, thunkAPI) => {
@@ -20,6 +22,9 @@ export const userSlice = createSlice({
     setEmail: (state, action: PayloadAction<string>) => {
       state.email = action.payload;
     },
+    setIsLoggedIn: (state, action: PayloadAction<boolean>) => {
+      state.isLoggedIn = action.payload;
+    },
   },
   extraReducers: (builder) => {
     // builder
@@ -30,6 +35,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setEmail } = userSlice.actions;
+export const { setEmail, setIsLoggedIn } = userSlice.actions;
 
 export default userSlice.reducer;
