@@ -24,7 +24,12 @@ const LoginButton = () => {
       Ausloggen
     </Button>
   ) : (
-    <Button startIcon={<img src="/assets/ms-logo.svg" alt="ms-logo" />} variant="outlined" onClick={handleLogin}>
+    <Button
+      color="secondary"
+      startIcon={<img src="/assets/ms-logo.svg" alt="ms-logo" />}
+      variant="outlined"
+      onClick={handleLogin}
+    >
       Bei Microsoft anmelden
     </Button>
   );
