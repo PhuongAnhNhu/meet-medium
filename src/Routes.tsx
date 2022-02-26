@@ -1,13 +1,13 @@
 import React from 'react';
-import App from './App';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
+import HomePage from './pages/HomePage';
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>

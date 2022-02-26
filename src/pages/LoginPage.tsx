@@ -1,6 +1,6 @@
-import { Card, CardHeader } from '@mui/material';
-import { Box } from '@mui/system';
 import React from 'react';
+import { Card } from '@mui/material';
+import { Box } from '@mui/system';
 import LoginButton from '../components/LoginButton';
 
 const LoginPage = () => {
