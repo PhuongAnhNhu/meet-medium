@@ -1,11 +1,18 @@
 import React from 'react';
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';
-import { Button } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import { loginRequest } from '../authConfig';
+import { useNavigate } from 'react-router-dom';
 
 const LoginButton = () => {
   const { instance } = useMsal();
   const isAuthenticated = useIsAuthenticated();
+  const navigate = useNavigate();
+
+  if (isAuthenticated) {
+    navigate('/home');
+    return <CircularProgress />;
+  }
 
   const handleLogin = () => {
     instance.loginRedirect(loginRequest).catch((e) => {
@@ -13,17 +20,7 @@ const LoginButton = () => {
     });
   };
 
-  const handleLogout = () => {
-    instance.logoutRedirect().catch((e) => {
-      console.error(e);
-    });
-  };
-
-  return isAuthenticated ? (
-    <Button variant="outlined" onClick={handleLogout}>
-      Ausloggen
-    </Button>
-  ) : (
+  return (
     <Button
       color="secondary"
       startIcon={<img src="/assets/ms-logo.svg" alt="ms-logo" />}

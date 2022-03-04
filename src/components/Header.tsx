@@ -3,10 +3,12 @@ import { useMsal } from '@azure/msal-react';
 import { AppBar, Avatar, Box, Button, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const userProfile = useSelector((state: RootState) => state.user.userProfile);
   const { instance } = useMsal();
+  const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState<Element | null>(null);
   const open = Boolean(anchorEl);
@@ -19,9 +21,12 @@ const Header = () => {
 
   const handleLogout = () => {
     setAnchorEl(null);
-    instance.logoutRedirect().catch((e) => {
-      console.error(e);
-    });
+    instance
+      .logoutRedirect()
+      .then(() => navigate('/login'))
+      .catch((e) => {
+        console.error(e);
+      });
   };
   return (
     <Box>
@@ -31,10 +36,9 @@ const Header = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Logo
           </Typography>
-          <IconButton>
-            <Avatar alt={userProfile?.displayName} src="/static/images/avatar/2.jpg" />
-          </IconButton>
+
           <Button
+            startIcon={<Avatar alt={userProfile?.displayName} src="/static/images/avatar/2.jpg" />}
             variant="text"
             color="secondary"
             id="basic-button"
@@ -50,6 +54,14 @@ const Header = () => {
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
             MenuListProps={{
               'aria-labelledby': 'basic-button',
             }}

@@ -5,6 +5,7 @@ import { fetchUserProfile, setAccessToken, setIsLoggedIn } from 'store/features/
 import { loginRequest } from './authConfig';
 import './App.css';
 import AppRoutes from './Routes';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   const { instance, accounts } = useMsal();
@@ -28,7 +29,9 @@ function App() {
 
   return (
     <div className="App">
-      <AppRoutes></AppRoutes>
+      <BrowserRouter>
+        <AppRoutes></AppRoutes>
+      </BrowserRouter>
     </div>
   );
 }
