@@ -4,53 +4,6 @@ exports[`renders learn react link 1`] = `
 <div>
   <div
     class="App"
-  >
-    <div>
-      <div
-        class="MuiBox-root css-0"
-      >
-        <header
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionStatic css-hip9hq-MuiPaper-root-MuiAppBar-root"
-        >
-          <div
-            class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-1t29gy6-MuiToolbar-root"
-          >
-            <button
-              aria-label="menu"
-              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-edgeStart MuiIconButton-sizeLarge css-ancrnh-MuiButtonBase-root-MuiIconButton-root"
-              tabindex="0"
-              type="button"
-            >
-              <span
-                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-              />
-            </button>
-            <div
-              class="MuiTypography-root MuiTypography-h6 css-1juivf6-MuiTypography-root"
-            >
-              Logo
-            </div>
-            <button
-              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
-              tabindex="0"
-              type="button"
-            >
-              <div
-                class="MuiAvatar-root MuiAvatar-circular css-1wlk0hk-MuiAvatar-root"
-              >
-                <img
-                  class="MuiAvatar-img css-1pqm26d-MuiAvatar-img"
-                  src="/static/images/avatar/2.jpg"
-                />
-              </div>
-              <span
-                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-              />
-            </button>
-          </div>
-        </header>
-      </div>
-    </div>
-  </div>
+  />
 </div>
 `;
