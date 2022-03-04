@@ -17,10 +17,13 @@ const theme = createTheme({
       dark: '#789e9e',
     },
     secondary: {
-      main: '#4c7d7d',
+      main: '#d9894c',
     },
     background: {
       default: '#1b5e20',
+    },
+    text: {
+      primary: '#000',
     },
   },
 });
