@@ -1,24 +1,22 @@
-import React from 'react';
-import { useIsAuthenticated, useMsal } from '@azure/msal-react';
+import React, { useState } from 'react';
+
 import { Button, CircularProgress } from '@mui/material';
-import { loginRequest } from '../authConfig';
-import { useNavigate } from 'react-router-dom';
 
-const LoginButton = () => {
-  const { instance } = useMsal();
-  const isAuthenticated = useIsAuthenticated();
-  const navigate = useNavigate();
+export interface LoginButtonProps {
+  onLogin?: () => void;
+}
 
-  if (isAuthenticated) {
-    navigate('/home');
-    return <CircularProgress />;
-  }
+const LoginButton = ({ onLogin }: LoginButtonProps) => {
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = () => {
-    instance.loginRedirect(loginRequest).catch((e) => {
-      console.error(e);
-    });
+    setIsLoading(true);
+    onLogin?.();
   };
+
+  if (isLoading) {
+    return <CircularProgress />;
+  }
 
   return (
     <Button

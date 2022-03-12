@@ -12,12 +12,13 @@ const routes: (isLoggedIn: boolean) => RouteObject[] = (isLoggedIn) => [
   },
   {
     path: '/login',
-    element: <LoginPage />,
+    element: !isLoggedIn ? <LoginPage /> : <Navigate to="/home" />,
   },
 ];
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
+
   const routing = useRoutes(routes(isLoggedIn));
 
   return routing;
