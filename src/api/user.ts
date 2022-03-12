@@ -26,7 +26,5 @@ export async function getUserProfile(accessToken: string): Promise<UserProfile> 
     headers: headers,
   };
 
-  return fetch(graphConfig.graphMeEndpoint, options)
-    .then((response) => response.json())
-    .catch((error) => console.log(error));
+  return fetch(graphConfig.graphMeEndpoint, options).then((response) => response.json());
 }
