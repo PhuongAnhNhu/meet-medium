@@ -27,7 +27,7 @@ export const roomSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchRoomList.fulfilled, (state, action) => {
-        console.log(action.payload);
+        // console.log(action.payload);
         state.roomList = action.payload;
       })
       .addCase(fetchRoomList.rejected, (state, action) => {

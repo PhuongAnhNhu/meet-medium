@@ -6,6 +6,7 @@ import { loginRequest } from './authConfig';
 import './App.css';
 import AppRoutes from './Routes';
 import { BrowserRouter } from 'react-router-dom';
+import { Box } from '@mui/material';
 
 function App() {
   const { instance, accounts } = useMsal();
@@ -28,11 +29,11 @@ function App() {
   }, [accounts, dispatch, instance, isAuthenticated]);
 
   return (
-    <div className="App">
+    <Box className="App">
       <BrowserRouter>
         <AppRoutes></AppRoutes>
       </BrowserRouter>
-    </div>
+    </Box>
   );
 }
 

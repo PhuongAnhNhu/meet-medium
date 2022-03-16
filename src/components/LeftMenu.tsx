@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider, IconButton, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Divider, IconButton, List, ListItemButton, Box, ListItemIcon, ListItemText } from '@mui/material';
 import Drawer from '@mui/material/Drawer';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -8,6 +8,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import EventIcon from '@mui/icons-material/Event';
 import { Theme, CSSObject } from '@mui/material/styles';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240; // Breite der Menu wenn öffen
 
@@ -55,11 +56,11 @@ export const Menu = styled(Drawer)(({ theme, open }) => ({
   }),
 }));
 
-interface LinkMenuProps {
+interface LeftMenuProps {
   open: boolean;
   drawerClose: () => void;
 }
-const LinkMenu = ({ open, drawerClose }: LinkMenuProps) => {
+const LeftMenu = ({ open, drawerClose }: LeftMenuProps) => {
   const theme = useTheme();
 
   return (
@@ -80,8 +81,16 @@ const LinkMenu = ({ open, drawerClose }: LinkMenuProps) => {
                 justifyContent: 'center',
               }}
             >
-              {index === 0 && <DashboardIcon />}
-              {index === 1 && <AddBoxIcon />}
+              {index === 0 && (
+                <Link to="/home">
+                  <DashboardIcon />
+                </Link>
+              )}
+              {index === 1 && (
+                <Link to="/createMeeting">
+                  <AddBoxIcon />
+                </Link>
+              )}
               {index === 2 && <EventIcon />}
             </ListItemIcon>
             <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
@@ -92,4 +101,4 @@ const LinkMenu = ({ open, drawerClose }: LinkMenuProps) => {
   );
 };
 
-export default LinkMenu;
+export default LeftMenu;
