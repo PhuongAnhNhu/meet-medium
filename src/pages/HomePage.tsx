@@ -26,7 +26,7 @@ const Homepage = () => {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <Header />
+      <Header open={open} drawerOpen={handleDrawerOpen} />
       <LinkMenu open={open} drawerClose={handleDrawerClose} />
     </Box>
   );
