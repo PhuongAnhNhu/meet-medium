@@ -72,8 +72,8 @@ const LeftMenu = ({ open, drawerClose }: LeftMenuProps) => {
       </DrawerHeader>
       <Divider />
       <List>
-        {['Dashboard', 'Erstellen Termin', 'Kalender'].map((text, index) => (
-          <ListItemButton key={text} sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5 }}>
+        <Link to="/home">
+          <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5 }}>
             <ListItemIcon
               sx={{
                 minWidth: 0,
@@ -81,21 +81,39 @@ const LeftMenu = ({ open, drawerClose }: LeftMenuProps) => {
                 justifyContent: 'center',
               }}
             >
-              {index === 0 && (
-                <Link to="/home">
-                  <DashboardIcon />
-                </Link>
-              )}
-              {index === 1 && (
-                <Link to="/createMeeting">
-                  <AddBoxIcon />
-                </Link>
-              )}
-              {index === 2 && <EventIcon />}
+              <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+            <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
           </ListItemButton>
-        ))}
+        </Link>
+        <Link to="/createMeeting">
+          <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5 }}>
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
+              }}
+            >
+              <AddBoxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Meeting erstellen" sx={{ opacity: open ? 1 : 0 }} />
+          </ListItemButton>
+        </Link>
+        <Link to="/calendar">
+          <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5 }}>
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
+              }}
+            >
+              <EventIcon />
+            </ListItemIcon>
+            <ListItemText primary="Kalendaer" sx={{ opacity: open ? 1 : 0 }} />
+          </ListItemButton>
+        </Link>
       </List>
     </Menu>
   );

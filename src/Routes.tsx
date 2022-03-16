@@ -6,6 +6,7 @@ import CreateMeeting from './pages/CreateMeeting';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import HomeLayout from 'layout/HomeLayout';
+import CalendarPage from './pages/CalendarPage';
 
 const routes: (isLoggedIn: boolean) => RouteObject[] = (isLoggedIn) => [
   {
@@ -15,6 +16,10 @@ const routes: (isLoggedIn: boolean) => RouteObject[] = (isLoggedIn) => [
       {
         path: '/createMeeting',
         element: <CreateMeeting />,
+      },
+      {
+        path: '/calendar',
+        element: <CalendarPage />,
       },
       {
         path: '/home',
