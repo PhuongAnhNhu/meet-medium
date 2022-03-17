@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider, IconButton, List, ListItemButton, Box, ListItemIcon, ListItemText } from '@mui/material';
+import { Divider, IconButton, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import Drawer from '@mui/material/Drawer';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AddBoxIcon from '@mui/icons-material/AddBox';

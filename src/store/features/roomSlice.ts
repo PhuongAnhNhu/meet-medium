@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getRoomList, Room } from '../../api/room';
 
 export interface RoomListState {
-  roomList?: Room[];
+  roomList: Room[];
   isLoading: boolean;
   error: unknown[];
 }
