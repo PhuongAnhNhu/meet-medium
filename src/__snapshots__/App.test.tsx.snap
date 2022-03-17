@@ -3,7 +3,222 @@
 exports[`renders learn react link 1`] = `
 <div>
   <div
-    class="App"
-  />
+    class="App MuiBox-root css-0"
+  >
+    <div
+      class="MuiBox-root css-k008qs"
+    >
+      <header
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-19z1ozs-MuiPaper-root-MuiAppBar-root"
+      >
+        <div
+          class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-1t29gy6-MuiToolbar-root"
+        >
+          <button
+            aria-label="menu"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-edgeStart MuiIconButton-sizeLarge css-ancrnh-MuiButtonBase-root-MuiIconButton-root"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              data-testid="MenuIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+          <div
+            class="MuiTypography-root MuiTypography-h6 css-1juivf6-MuiTypography-root"
+          >
+            Logo
+          </div>
+          <button
+            aria-haspopup="true"
+            class="MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1d3f8j8-MuiButtonBase-root-MuiButton-root"
+            id="basic-button"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+            >
+              <div
+                class="MuiAvatar-root MuiAvatar-circular css-1wlk0hk-MuiAvatar-root"
+              >
+                <img
+                  class="MuiAvatar-img css-1pqm26d-MuiAvatar-img"
+                  src="/static/images/avatar/2.jpg"
+                />
+              </div>
+            </span>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+      </header>
+      <div
+        class="MuiDrawer-root MuiDrawer-docked css-2dum1v-MuiDrawer-docked"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-12i7wg6-MuiPaper-root-MuiDrawer-paper"
+        >
+          <div
+            class="css-1u2mxbp"
+          >
+            <button
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="ChevronLeftIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+                />
+              </svg>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <hr
+            class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+          />
+          <ul
+            class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
+          >
+            <a
+              href="/home"
+            >
+              <div
+                class="MuiListItemButton-root MuiListItemButton-gutters MuiButtonBase-root css-1avr7ju-MuiButtonBase-root-MuiListItemButton-root"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemIcon-root css-1ddsiuw-MuiListItemIcon-root"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="DashboardIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="MuiListItemText-root css-1cag644-MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+                  >
+                    Dashboard
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </a>
+            <a
+              href="/createMeeting"
+            >
+              <div
+                class="MuiListItemButton-root MuiListItemButton-gutters MuiButtonBase-root css-1avr7ju-MuiButtonBase-root-MuiListItemButton-root"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemIcon-root css-1ddsiuw-MuiListItemIcon-root"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="AddBoxIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="MuiListItemText-root css-1cag644-MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+                  >
+                    Meeting erstellen
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </a>
+            <a
+              href="/calendar"
+            >
+              <div
+                class="MuiListItemButton-root MuiListItemButton-gutters MuiButtonBase-root css-1avr7ju-MuiButtonBase-root-MuiListItemButton-root"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemIcon-root css-1ddsiuw-MuiListItemIcon-root"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="EventIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="MuiListItemText-root css-1cag644-MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+                  >
+                    Kalendaer
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </a>
+          </ul>
+        </div>
+      </div>
+      <div
+        class="css-xt00la"
+      />
+    </div>
+  </div>
 </div>
 `;
