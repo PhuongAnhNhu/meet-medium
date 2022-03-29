@@ -4,7 +4,7 @@ import React from 'react';
 
 const RoomCard = ({ name, address }: Room) => {
   return (
-    <Card sx={{ maxWidth: 380 }}>
+    <Card>
       <CardHeader title={name} sx={{ backgroundColor: 'primary.main', maxHeight: 30 }}></CardHeader>
       <Divider />
       <CardContent>
