@@ -8,6 +8,7 @@ import LeftMenu from '../components/LeftMenu';
 const DrawerBox = styled('div')(({ theme }) => ({
   marginTop: theme.mixins.toolbar.minHeight,
   marginLeft: '16px',
+  width: '100%',
 }));
 
 const HomeLayout = () => {
