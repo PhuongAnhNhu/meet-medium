@@ -29,7 +29,7 @@ const CreateMeeting = () => {
         <FormControl margin="dense" fullWidth>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
-              label="Basic example"
+              label="Datum"
               value={value}
               onChange={(newValue) => {
                 setValue(newValue);
