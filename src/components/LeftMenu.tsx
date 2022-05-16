@@ -100,20 +100,6 @@ const LeftMenu = ({ open, drawerClose }: LeftMenuProps) => {
             <ListItemText primary="Meeting erstellen" sx={{ opacity: open ? 1 : 0 }} />
           </ListItemButton>
         </Link>
-        <Link to="/calendar">
-          <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5 }}>
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-                mr: open ? 3 : 'auto',
-                justifyContent: 'center',
-              }}
-            >
-              <EventIcon />
-            </ListItemIcon>
-            <ListItemText primary="Kalendaer" sx={{ opacity: open ? 1 : 0 }} />
-          </ListItemButton>
-        </Link>
       </List>
     </Menu>
   );
