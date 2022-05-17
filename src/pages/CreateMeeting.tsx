@@ -5,23 +5,21 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { DatePicker } from '@mui/lab';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
-import { Room } from 'api/room';
+import { roomFilter } from '../helper/roomFilter';
 
 const CreateMeeting = () => {
   const [value, setValue] = React.useState<Date | null>(new Date());
   const handleClick = () => {
     console.info('You clicked the Chip.');
   };
-  const timeOptions = [{ label: '10 Min' }, { label: '20 Min' }, { label: '30 Min' }];
-  const roomInBerlin = [
-    { label: 'Berlin - 7.01 Catan', address: 'Berlin-701Catan@endava.com' },
-    { label: 'Berlin - 7.02 London', address: 'Berlin-702London@endava.com' },
-    { label: 'Berlin - 7.03 Aquarium', address: 'Berlin-703Aquarium@endava.com' },
-    { label: 'Berlin - 7.04 Paris', address: 'Berlin-704Paris@endava.com' },
-    { label: 'Berlin - 7.05 Telefonzelle', address: 'Berlin-705Tefeonzelle@endava.com' },
-    { label: 'Berlin - 7.06 Bonn', address: 'Berlin-706Bonn@endava.com' },
-    { label: 'Berlin - 7.07 Moskau', address: 'Berlin-707Moskau@endava.com' },
-  ];
+  const timeOptions = ['10Min', '20Min', '30Min'];
+
+  const roomList = useSelector((state: RootState) => state.room.roomList);
+
+  const roomInBerlinOption = roomFilter(roomList).map((room) => {
+    return room.name;
+  });
+
   return (
     <Box mt={4} mr={2}>
       <FormGroup sx={{ width: '100%' }}>
@@ -50,7 +48,7 @@ const CreateMeeting = () => {
           <Autocomplete
             disablePortal
             id="combo-box-demo"
-            options={roomInBerlin}
+            options={roomInBerlinOption}
             renderInput={(params) => <TextField {...params} label="Raum" />}
           />
         </FormControl>

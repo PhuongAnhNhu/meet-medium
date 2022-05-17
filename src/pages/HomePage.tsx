@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from 'store';
 import { fetchRoomList } from '../store/features/roomSlice';
 import RoomCard from '../components/RoomCard';
-import { Room } from 'api/room';
 import { roomFilter } from '../helper/roomFilter';
 
 const Homepage = () => {
@@ -15,7 +14,6 @@ const Homepage = () => {
   const roomList = useSelector((state: RootState) => state.room.roomList);
 
   const roomInBerlin = roomFilter(roomList);
-  console.log(roomInBerlin);
 
   useEffect(() => {
     if (accessToken) {
