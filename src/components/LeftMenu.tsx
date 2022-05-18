@@ -6,7 +6,6 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import { styled, useTheme } from '@mui/material/styles';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import EventIcon from '@mui/icons-material/Event';
 import { Theme, CSSObject } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 

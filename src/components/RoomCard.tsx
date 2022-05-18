@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, Chip, Divider, IconButton, Typography } from '@mui/material';
-import { Room } from 'api/room';
 import React from 'react';
 
 const RoomCard = ({ name, address }: Room) => {

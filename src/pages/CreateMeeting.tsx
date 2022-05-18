@@ -2,7 +2,7 @@ import React from 'react';
 import { Autocomplete, Box, Button, Chip, FormControl, FormGroup, TextField, Typography } from '@mui/material';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { DatePicker } from '@mui/lab';
+import { DateTimePicker } from '@mui/lab';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { roomFilter } from '../helper/roomFilter';
@@ -26,7 +26,7 @@ const CreateMeeting = () => {
         <Typography variant="h3">Raum Buchen</Typography>
         <FormControl margin="dense" fullWidth>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
+            <DateTimePicker
               label="Datum"
               value={value}
               onChange={(newValue) => {
