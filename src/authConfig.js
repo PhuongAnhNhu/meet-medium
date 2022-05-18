@@ -19,4 +19,5 @@ export const loginRequest = {
 export const graphConfig = {
   graphMeEndpoint: 'https://graph.microsoft.com/v1.0/me',
   roomsEndpoint: 'https://graph.microsoft.com/beta/me/findRooms',
+  findMeetingsTimeEndpoit: 'https://graph.microsoft.com/v1.0/me/findMeetingTimes',
 };
