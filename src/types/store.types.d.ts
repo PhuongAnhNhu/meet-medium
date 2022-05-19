@@ -42,3 +42,22 @@ interface FindMeetingsTimePayload {
   returnSuggestionReasons: boolean;
   minimumAttendeePercentage: number;
 }
+
+interface Location {
+  displayName: string;
+  locationEmailAdress: string;
+}
+interface MeetingTimeSuggestion {
+  attendeeAvailability: [];
+  confident: number;
+  locations: Location[];
+  meetingTimeSlot: TimeSlotsItem[];
+  organizerAvailability: string;
+  suggestionReasen: String;
+}
+
+interface RoomSuggestionRespone {
+  ['@odata.context']: string;
+  emptySuggestionsReason: string;
+  meetingTimeSuggestions: MeetingTimeSuggestion[];
+}

@@ -21,12 +21,11 @@ export async function postFindMeetingsTime(accessToken: string, payload: FindMee
   const bearer = `Bearer ${accessToken}`;
 
   headers.append('Authorization', bearer);
+  headers.append('content-type', 'application/json;charset=UTF-8');
 
-  const options = {
+  return fetch(graphConfig.findMeetingsTimeEndpoint, {
     method: 'POST',
     headers,
-    payload,
-  };
-
-  return fetch(graphConfig.findMeetingsTimeEndpoint, options).then((response) => response.json());
+    body: JSON.stringify(payload),
+  }).then((response) => response.json());
 }

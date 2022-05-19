@@ -4,12 +4,14 @@ import { getRoomList, postFindMeetingsTime } from '../../api/room';
 
 export interface RoomListState {
   roomList: Room[];
+  meetingTimeSuggestion: MeetingTimeSuggestion[];
   isLoading: boolean;
   error: unknown[];
 }
 
 const initialState: RoomListState = {
   roomList: [],
+  meetingTimeSuggestion: [],
   isLoading: false,
   error: [],
 };
@@ -26,7 +28,7 @@ export const findMeetingsTime = createAsyncThunk(
   async (payload: FindMeetingsTimePayload, { getState }: any) => {
     const accessToken = getState().user.accessToken;
     const response = await postFindMeetingsTime(accessToken, payload);
-    return response;
+    return response.meetingTimeSuggestions;
   },
 );
 
@@ -45,7 +47,7 @@ export const roomSlice = createSlice({
       })
       .addCase(findMeetingsTime.fulfilled, (state, action) => {
         // console.log(action.payload);
-        state.roomList = action.payload;
+        state.meetingTimeSuggestion = action.payload;
       })
       .addCase(findMeetingsTime.rejected, (state, action) => {
         state.error.push(action.payload);
