@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getRoomList, Room } from '../../api/room';
+import { Method } from '@testing-library/react';
+import { getRoomList, postFindMeetingsTime } from '../../api/room';
 
 export interface RoomListState {
   roomList: Room[];
@@ -13,12 +14,21 @@ const initialState: RoomListState = {
   error: [],
 };
 
+// getRoomList(accessToken);
 export const fetchRoomList = createAsyncThunk('roomList/fetchRoomList', async (accessToken: string) => {
   const response = await getRoomList(accessToken);
   return response.value;
 });
 
-// getRoomList(accessToken);
+//postFindMeetingsTime
+export const findMeetingsTime = createAsyncThunk(
+  'roomList/roomListForm',
+  async (payload: FindMeetingsTimePayload, { getState }: any) => {
+    const accessToken = getState().user.accessToken;
+    const response = await postFindMeetingsTime(accessToken, payload);
+    return response;
+  },
+);
 
 export const roomSlice = createSlice({
   name: 'room',
@@ -31,6 +41,13 @@ export const roomSlice = createSlice({
         state.roomList = action.payload;
       })
       .addCase(fetchRoomList.rejected, (state, action) => {
+        state.error.push(action.payload);
+      })
+      .addCase(findMeetingsTime.fulfilled, (state, action) => {
+        // console.log(action.payload);
+        state.roomList = action.payload;
+      })
+      .addCase(findMeetingsTime.rejected, (state, action) => {
         state.error.push(action.payload);
       });
   },

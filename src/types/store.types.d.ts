@@ -6,40 +6,36 @@ interface Room {
   name: string;
   address: string;
 }
-interface FindMeetingsTimeFormPayload {
-  attendees: [
-    {
-      type: string;
-      emailAddress: {
-        address: string;
-      };
-    },
-  ];
+interface AttendeeBase {
+  type: string;
+  emailAddress: { address: string };
+}
+interface LocationConstraintItem {
+  resolveAvailability: boolean;
+  displayName: string;
+  locationEmailAddress: string;
+}
+
+interface TimeSlotsItem {
+  start: {
+    dateTime: string;
+    timeZone?: string;
+  };
+  end: {
+    dateTime: string;
+    timeZone?: string;
+  };
+}
+interface FindMeetingsTimePayload {
+  attendees: AttendeeBase[];
   locationConstraint: {
     isRequired: boolean;
     suggestLocation: boolean;
-    locations: [
-      {
-        resolveAvailability: boolean;
-        displayName: string;
-        locationEmailAddress: string;
-      },
-    ];
+    locations: LocationConstraintItem[];
   };
   timeConstraint: {
     activityDomain: string;
-    timeSlots: [
-      {
-        start: {
-          dateTime: string;
-          timeZone?: string;
-        };
-        end: {
-          dateTime: string;
-          timeZone?: string;
-        };
-      },
-    ];
+    timeSlots: TimeSlotsItem[];
   };
   isOrganizerOptional: boolean;
   meetingDuration: string;
