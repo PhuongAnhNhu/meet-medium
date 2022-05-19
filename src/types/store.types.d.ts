@@ -45,7 +45,7 @@ interface FindMeetingsTimePayload {
 
 interface Location {
   displayName: string;
-  locationEmailAdress: string;
+  locationEmailAddress: string;
 }
 interface MeetingTimeSuggestion {
   attendeeAvailability: [];

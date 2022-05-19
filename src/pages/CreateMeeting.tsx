@@ -1,25 +1,44 @@
-import React from 'react';
+import React, { SetStateAction, useEffect, useState } from 'react';
+import { RootState, useAppDispatch } from 'store';
 import { Autocomplete, Box, Button, Chip, FormControl, FormGroup, TextField, Typography } from '@mui/material';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { DateTimePicker } from '@mui/lab';
 import { useSelector } from 'react-redux';
-import { RootState } from 'store';
-import { roomFilter } from '../helper/roomFilter';
+import { findMeetingsTime } from 'store/features/roomSlice';
+import { payloadFindMettingsTime } from '../dummy/findmeetingdtime';
+import { roomSuggestion, timeSuggestion } from '../helper/suggestion';
 
 const CreateMeeting = () => {
-  const [value, setValue] = React.useState<Date | null>(new Date());
+  const [value, setValue] = useState<Date | null>(new Date());
+  const [period, setPeriod] = useState<string>('15');
+  const [room, setRoom] = useState<string>('Bonn');
+
   const handleClick = () => {
     console.info('You clicked the Chip.');
   };
-  const timeOptions = ['10Min', '20Min', '30Min'];
+  const handleChangePeriod = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPeriod(event.target.value);
+  };
 
-  const roomList = useSelector((state: RootState) => state.room.roomList);
+  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
+  const meetingTimeSuggestion = useSelector((state: RootState) => state.room.meetingTimeSuggestion);
 
-  const roomInBerlinOption = roomFilter(roomList).map((room) => {
-    return room.name;
-  });
+  //Suggestion Rooms
+  //TODO: check ob meetingTimeSuggestion ist da
+  const roomOptions = roomSuggestion(meetingTimeSuggestion);
 
+  //Suggestion Time
+  const timeOptions = timeSuggestion(room, meetingTimeSuggestion);
+  console.log(timeOptions);
+
+  // const roomOptions = ['raum'];
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (!!(isLoggedIn && period && value)) {
+      dispatch(findMeetingsTime(payloadFindMettingsTime));
+    }
+  }, [dispatch, isLoggedIn, period, value]);
   return (
     <Box mt={4} mr={2}>
       <FormGroup sx={{ width: '100%' }}>
@@ -36,22 +55,27 @@ const CreateMeeting = () => {
             />
           </LocalizationProvider>
         </FormControl>
+
         <FormControl margin="dense" fullWidth>
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={timeOptions}
-            renderInput={(params) => <TextField {...params} label="Dauert" />}
-          />
+          <TextField id="outlined-basic" label="Dauer" variant="outlined" onChange={handleChangePeriod}>
+            {period}
+          </TextField>
         </FormControl>
+
         <FormControl margin="dense" fullWidth>
           <Autocomplete
+            value={room}
             disablePortal
-            id="combo-box-demo"
-            options={roomInBerlinOption}
+            id="room-name"
+            options={roomOptions}
+            disabled={!(period && value)}
+            onChange={(event: any, newValue: any) => {
+              setRoom(newValue);
+            }}
             renderInput={(params) => <TextField {...params} label="Raum" />}
           />
         </FormControl>
+
         <Box mb={2} mt={2} sx={{ display: 'flex', flexFlow: 'row' }}>
           <Chip label="10:00 - 20:00" onClick={handleClick} />
           <Chip label="15:20 - 16:40" onClick={handleClick} />
