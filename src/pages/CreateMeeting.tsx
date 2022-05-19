@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RootState, useAppDispatch } from 'store';
 import { Autocomplete, Box, Button, Chip, FormControl, FormGroup, TextField, Typography } from '@mui/material';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -77,8 +77,9 @@ const CreateMeeting = () => {
         </FormControl>
 
         <Box mb={2} mt={2} sx={{ display: 'flex', flexFlow: 'row' }}>
-          <Chip label="10:00 - 20:00" onClick={handleClick} />
-          <Chip label="15:20 - 16:40" onClick={handleClick} />
+          {timeOptions?.map((item, key) => {
+            return <Chip key={key} label={`${item[0]}-${item[1]}`} onClick={handleClick} />;
+          })}
         </Box>
 
         <Button variant="contained">Buchen</Button>
