@@ -1,16 +1,16 @@
 import { format } from 'date-fns';
 
-export const roomSuggestion = (meetingTimeSuggestions: MeetingTimeSuggestion[]) => {
+export const roomSuggestion = async (meetingTimeSuggestions: MeetingTimeSuggestion[]) => {
   const roomList: string[] = [];
+
   const suggestionList = meetingTimeSuggestions?.map((meetingTimeSuggestion: MeetingTimeSuggestion) => {
     return meetingTimeSuggestion.locations;
   });
-  for (let i = 0; i < suggestionList.length; i++) {
+  for (let i = 0; i < suggestionList?.length; i++) {
     for (let j = 0; j < suggestionList[i].length; j++) {
       if (!roomList.includes(suggestionList[i][j].displayName)) roomList.push(suggestionList[i][j].displayName);
     }
   }
-
   return roomList;
 };
 
@@ -31,8 +31,8 @@ export const timeSuggestion = (raumName: string, meetingTimeSuggestions: Meeting
   // Bearbeiten timeList aaray damit FE einfacher zu benutzen
   const timeSuggestions = timeList.map((element: TimeSlotsItem) => {
     const temp = [];
-    temp.push(format(new Date(element.start.dateTime), 'HH:MM'));
-    temp.push(format(new Date(element.end.dateTime), 'HH:MM'));
+    temp.push(format(new Date(element.start.dateTime), 'HH:mm'));
+    temp.push(format(new Date(element.end.dateTime), 'HH:mm'));
     return temp;
   });
 

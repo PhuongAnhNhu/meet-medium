@@ -8,9 +8,11 @@ import { useSelector } from 'react-redux';
 import { findMeetingsTime } from 'store/features/roomSlice';
 import { payloadFindMettingsTime } from '../dummy/findmeetingdtime';
 import { roomSuggestion, timeSuggestion } from '../helper/suggestion';
+import { findMeetingsTimePayload } from '../helper/payloadFindMeetingsTime';
+import { resolve } from 'path/posix';
 
 const CreateMeeting = () => {
-  const [value, setValue] = useState<Date | null>(new Date());
+  const [value, setValue] = useState<Date>(new Date());
   const [period, setPeriod] = useState<string>('15');
   const [room, setRoom] = useState<string>('Bonn');
 
@@ -22,23 +24,31 @@ const CreateMeeting = () => {
   };
 
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
+  const userEmail = useSelector((state: RootState) => state.user.userProfile?.mail);
+
+  //mach nur wenn userMail
+  const test = findMeetingsTimePayload(value, period, userEmail);
+
+  // console.log(test);
+
   const meetingTimeSuggestion = useSelector((state: RootState) => state.room.meetingTimeSuggestion);
 
   //Suggestion Rooms
-  //TODO: check ob meetingTimeSuggestion ist da
-  const roomOptions = roomSuggestion(meetingTimeSuggestion);
+  //TODO: array aus Promise result holen
+  const roomOptionsTest = roomSuggestion(meetingTimeSuggestion).then((res) => res);
+  console.log(roomOptionsTest);
+  const roomOptions = ['Bonn'];
 
   //Suggestion Time
   const timeOptions = timeSuggestion(room, meetingTimeSuggestion);
-  console.log(timeOptions);
 
   // const roomOptions = ['raum'];
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if (!!(isLoggedIn && period && value)) {
+    if (!!(isLoggedIn && period && value && userEmail)) {
       dispatch(findMeetingsTime(payloadFindMettingsTime));
     }
-  }, [dispatch, isLoggedIn, period, value]);
+  }, [dispatch, isLoggedIn, period, value, userEmail]);
   return (
     <Box mt={4} mr={2}>
       <FormGroup sx={{ width: '100%' }}>
@@ -48,7 +58,7 @@ const CreateMeeting = () => {
             <DateTimePicker
               label="Datum"
               value={value}
-              onChange={(newValue) => {
+              onChange={(newValue: any) => {
                 setValue(newValue);
               }}
               renderInput={(params) => <TextField {...params} />}

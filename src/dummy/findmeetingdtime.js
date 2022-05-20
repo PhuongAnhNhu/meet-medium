@@ -60,13 +60,13 @@ export const payloadFindMettingsTime = {
     activityDomain: 'work',
     timeSlots: [
       {
-        start: { dateTime: '2022-06-14T10:00:00', timeZone: 'UTC' },
-        end: { dateTime: '2022-06-14T15:00:00', timeZone: 'UTC' },
+        start: { dateTime: '2022-06-14T14:00:00', timeZone: 'UTC' },
+        end: { dateTime: '2022-06-14T16:00:00', timeZone: 'UTC' },
       },
     ],
   },
   isOrganizerOptional: false,
-  meetingDuration: 'PT1H30M',
+  meetingDuration: 'PT0H30M',
   returnSuggestionReasons: true,
-  minimumAttendeePercentage: 100,
+  minimumAttendeePercentage: 40,
 };
