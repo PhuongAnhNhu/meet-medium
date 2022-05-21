@@ -26,7 +26,13 @@ interface TimeSlotsItem {
     timeZone?: string;
   };
 }
+
 interface FindMeetingsTimePayload {
+  datetime: Date;
+  period: string;
+}
+
+interface FindMeetingsTimeRequestPayload {
   attendees: AttendeeBase[];
   locationConstraint: {
     isRequired: boolean;
@@ -56,7 +62,7 @@ interface MeetingTimeSuggestion {
   suggestionReasen: String;
 }
 
-interface RoomSuggestionRespone {
+interface RoomSuggestionResponse {
   ['@odata.context']: string;
   emptySuggestionsReason: string;
   meetingTimeSuggestions: MeetingTimeSuggestion[];

@@ -8,15 +8,10 @@ const RoomCard = ({ name, address }: Room) => {
       <Divider />
       <CardContent>
         <Typography>Frei: </Typography>
-        <IconButton>
-          <Chip label="10:00 - 10:30" />
-        </IconButton>
-        <IconButton>
-          <Chip label="10:00 - 10:30" />
-        </IconButton>
-        <IconButton>
-          <Chip label="10:00 - 10:30" />
-        </IconButton>
+        <Chip label="10:00 - 10:30" />
+        <Chip label="10:00 - 10:30" />
+        <Chip label="10:00 - 10:30" />
+        ´´
       </CardContent>
     </Card>
   );

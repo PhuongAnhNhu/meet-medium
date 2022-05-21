@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Method } from '@testing-library/react';
+import { findMeetingsTimePayload } from 'helper/payloadFindMeetingsTime';
+import { RootState } from 'store';
 import { getRoomList, postFindMeetingsTime } from '../../api/room';
 
 export interface RoomListState {
@@ -17,18 +18,25 @@ const initialState: RoomListState = {
 };
 
 // getRoomList(accessToken);
-export const fetchRoomList = createAsyncThunk('roomList/fetchRoomList', async (accessToken: string) => {
+export const fetchRoomList = createAsyncThunk('room/fetchRoomList', async (accessToken: string) => {
   const response = await getRoomList(accessToken);
   return response.value;
 });
 
 //postFindMeetingsTime
-export const findMeetingsTime = createAsyncThunk(
-  'roomList/roomListForm',
-  async (payload: FindMeetingsTimePayload, { getState }: any) => {
-    const accessToken = getState().user.accessToken;
-    const response = await postFindMeetingsTime(accessToken, payload);
-    return response.meetingTimeSuggestions;
+export const findMeetingsTime = createAsyncThunk<any, FindMeetingsTimePayload, { state: RootState }>(
+  'room/findMeetingsTime',
+  async ({ datetime, period }, { getState }) => {
+    const {
+      user: { accessToken, userProfile },
+    } = getState();
+
+    if (accessToken && userProfile?.mail) {
+      const payload = findMeetingsTimePayload(datetime, period, userProfile.mail);
+      const response = await postFindMeetingsTime(accessToken, payload);
+      return response.meetingTimeSuggestions;
+    }
+    return Promise.reject('AccessToken or userProfile.mail is missing');
   },
 );
 
@@ -46,7 +54,6 @@ export const roomSlice = createSlice({
         state.error.push(action.payload);
       })
       .addCase(findMeetingsTime.fulfilled, (state, action) => {
-        // console.log(action.payload);
         state.meetingTimeSuggestion = action.payload;
       })
       .addCase(findMeetingsTime.rejected, (state, action) => {

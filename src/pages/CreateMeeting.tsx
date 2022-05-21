@@ -1,99 +1,147 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, FormEvent, ChangeEvent, SyntheticEvent } from 'react';
 import { RootState, useAppDispatch } from 'store';
-import { Autocomplete, Box, Button, Chip, FormControl, FormGroup, TextField, Typography } from '@mui/material';
+import {
+  Autocomplete,
+  Box,
+  Button,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  TextField,
+  Typography,
+} from '@mui/material';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { DateTimePicker } from '@mui/lab';
 import { useSelector } from 'react-redux';
+import { getRoomOptions, getTimeOptions } from '../helper/suggestion';
 import { findMeetingsTime } from 'store/features/roomSlice';
-import { payloadFindMettingsTime } from '../dummy/findmeetingdtime';
-import { roomSuggestion, timeSuggestion } from '../helper/suggestion';
-import { findMeetingsTimePayload } from '../helper/payloadFindMeetingsTime';
-import { resolve } from 'path/posix';
+
+interface MeetingForm {
+  datetime: Date;
+  period?: string;
+  room?: string;
+  timeslot?: string[];
+}
+
+const initialFormState: MeetingForm = {
+  datetime: new Date(),
+  period: '',
+  room: '',
+  timeslot: [],
+};
 
 const CreateMeeting = () => {
-  const [value, setValue] = useState<Date>(new Date());
-  const [period, setPeriod] = useState<string>('15');
-  const [room, setRoom] = useState<string>('Bonn');
+  const [formState, setFormState] = useState<MeetingForm>(initialFormState);
+  const [roomOptions, setRoomOptions] = useState<string[]>([]);
+  const [timeOptions, setTimeOptions] = useState<string[][]>([]);
 
-  const handleClick = () => {
-    console.info('You clicked the Chip.');
-  };
-  const handleChangePeriod = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPeriod(event.target.value);
-  };
+  /**
+   * Only used to get the timeOptions and the roomOptions
+   */
+  const allMeetingData = useSelector((state: RootState) => state.room.meetingTimeSuggestion);
 
-  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
-  const userEmail = useSelector((state: RootState) => state.user.userProfile?.mail);
-
-  //mach nur wenn userMail
-  const test = findMeetingsTimePayload(value, period, userEmail);
-
-  // console.log(test);
-
-  const meetingTimeSuggestion = useSelector((state: RootState) => state.room.meetingTimeSuggestion);
-
-  //Suggestion Rooms
-  //TODO: array aus Promise result holen
-  const roomOptionsTest = roomSuggestion(meetingTimeSuggestion).then((res) => res);
-  console.log(roomOptionsTest);
-  const roomOptions = ['Bonn'];
-
-  //Suggestion Time
-  const timeOptions = timeSuggestion(room, meetingTimeSuggestion);
-
-  // const roomOptions = ['raum'];
   const dispatch = useAppDispatch();
+
   useEffect(() => {
-    if (!!(isLoggedIn && period && value && userEmail)) {
-      dispatch(findMeetingsTime(payloadFindMettingsTime));
+    if (allMeetingData.length > 0) {
+      const roomOptions = getRoomOptions(allMeetingData);
+      setRoomOptions(roomOptions);
     }
-  }, [dispatch, isLoggedIn, period, value, userEmail]);
+  }, [allMeetingData]);
+
+  const handleDateTimeChange = (date: Date | null) => {
+    date && setFormState((currentFormState) => ({ ...initialFormState, datetime: date }));
+  };
+
+  const handleChangePeriod = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const period = event.target.value;
+    setFormState((currentFormState) => ({ ...currentFormState, period, room: '' }));
+    if (period) {
+      dispatch(findMeetingsTime({ datetime: formState.datetime, period }));
+    }
+    if (!period) {
+      setTimeOptions([]);
+    }
+  };
+
+  const handleRoomChange = (event: SyntheticEvent<Element, Event>, room: string | null) => {
+    if (room) {
+      setFormState((currentFormState) => ({ ...currentFormState, room }));
+
+      const timeOptions = getTimeOptions(room, allMeetingData);
+      setTimeOptions(timeOptions);
+    }
+  };
+
+  const handleTimeslotChange = (event: any) => {
+    console.log(event);
+    setFormState((currentFormState) => ({
+      ...currentFormState,
+      timeslot: timeOptions[event.target.value],
+    }));
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  };
+
   return (
-    <Box mt={4} mr={2}>
-      <FormGroup sx={{ width: '100%' }}>
+    <Box mt={4} mr={2} sx={{ width: '100%' }}>
+      <form onSubmit={handleSubmit}>
         <Typography variant="h3">Raum Buchen</Typography>
         <FormControl margin="dense" fullWidth>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DateTimePicker
+              ampm={false}
               label="Datum"
-              value={value}
-              onChange={(newValue: any) => {
-                setValue(newValue);
-              }}
-              renderInput={(params) => <TextField {...params} />}
+              value={formState.datetime}
+              onChange={handleDateTimeChange}
+              renderInput={(params) => <TextField {...params} name="datetime" />}
             />
           </LocalizationProvider>
         </FormControl>
 
         <FormControl margin="dense" fullWidth>
-          <TextField id="outlined-basic" label="Dauer" variant="outlined" onChange={handleChangePeriod}>
-            {period}
-          </TextField>
+          <TextField
+            id="outlined-basic"
+            label="Dauer"
+            type="number"
+            variant="outlined"
+            value={formState.period}
+            onChange={handleChangePeriod}
+            name="period"
+          />
         </FormControl>
 
         <FormControl margin="dense" fullWidth>
           <Autocomplete
-            value={room}
+            value={formState.room}
             disablePortal
-            id="room-name"
-            options={roomOptions}
-            disabled={!(period && value)}
-            onChange={(event: any, newValue: any) => {
-              setRoom(newValue);
-            }}
-            renderInput={(params) => <TextField {...params} label="Raum" />}
+            options={[...roomOptions, '']}
+            disabled={!(formState.period && formState.datetime)}
+            onChange={handleRoomChange}
+            renderInput={(params) => <TextField {...params} label="Raum" name="roomname" />}
           />
         </FormControl>
 
-        <Box mb={2} mt={2} sx={{ display: 'flex', flexFlow: 'row' }}>
-          {timeOptions?.map((item, key) => {
-            return <Chip key={key} label={`${item[0]}-${item[1]}`} onClick={handleClick} />;
-          })}
-        </Box>
+        {!!timeOptions && (
+          <Box mb={2} mt={2} sx={{ display: 'flex', flexFlow: 'row' }}>
+            <FormControl>
+              <RadioGroup name="timeslot" onChange={handleTimeslotChange}>
+                {timeOptions?.map((item, key) => {
+                  return <FormControlLabel key={key} value={key} control={<Radio />} label={`${item[0]}-${item[1]}`} />;
+                })}
+              </RadioGroup>
+            </FormControl>
+          </Box>
+        )}
 
-        <Button variant="contained">Buchen</Button>
-      </FormGroup>
+        <Button type="submit" variant="contained">
+          Buchen
+        </Button>
+      </form>
     </Box>
   );
 };

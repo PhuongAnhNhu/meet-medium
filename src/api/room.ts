@@ -16,7 +16,10 @@ export async function getRoomList(accessToken: string): Promise<RoomResponse> {
   return fetch(graphConfig.roomsEndpoint, options).then((response) => response.json());
 }
 
-export async function postFindMeetingsTime(accessToken: string, payload: FindMeetingsTimePayload) {
+export async function postFindMeetingsTime(
+  accessToken: string,
+  payload: FindMeetingsTimeRequestPayload,
+): Promise<RoomSuggestionResponse> {
   const headers = new Headers();
   const bearer = `Bearer ${accessToken}`;
 

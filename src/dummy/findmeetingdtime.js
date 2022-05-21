@@ -60,8 +60,8 @@ export const payloadFindMettingsTime = {
     activityDomain: 'work',
     timeSlots: [
       {
-        start: { dateTime: '2022-06-14T14:00:00', timeZone: 'UTC' },
-        end: { dateTime: '2022-06-14T16:00:00', timeZone: 'UTC' },
+        start: { dateTime: '2022-06-14T10:34:03', timeZone: 'Central European Standard Time' },
+        end: { dateTime: '2022-06-14T14:34:03', timeZone: 'Central European Standard Time' },
       },
     ],
   },

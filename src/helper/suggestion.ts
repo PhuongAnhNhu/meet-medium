@@ -1,20 +1,23 @@
 import { format } from 'date-fns';
 
-export const roomSuggestion = async (meetingTimeSuggestions: MeetingTimeSuggestion[]) => {
+export const getRoomOptions = (meetingTimeSuggestions: MeetingTimeSuggestion[]) => {
   const roomList: string[] = [];
 
   const suggestionList = meetingTimeSuggestions?.map((meetingTimeSuggestion: MeetingTimeSuggestion) => {
     return meetingTimeSuggestion.locations;
   });
+
   for (let i = 0; i < suggestionList?.length; i++) {
     for (let j = 0; j < suggestionList[i].length; j++) {
-      if (!roomList.includes(suggestionList[i][j].displayName)) roomList.push(suggestionList[i][j].displayName);
+      if (!roomList.includes(suggestionList[i][j].displayName)) {
+        roomList.push(suggestionList[i][j].displayName);
+      }
     }
   }
   return roomList;
 };
 
-export const timeSuggestion = (raumName: string, meetingTimeSuggestions: MeetingTimeSuggestion[]) => {
+export const getTimeOptions = (raumName: string, meetingTimeSuggestions: MeetingTimeSuggestion[]) => {
   const timeList: any[] = [];
 
   //return alle TimeSlots von einem Raum

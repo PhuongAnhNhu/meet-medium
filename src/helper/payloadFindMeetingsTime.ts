@@ -1,14 +1,14 @@
-import { format } from 'date-fns';
+import { format, addHours } from 'date-fns';
 
-export const findMeetingsTimePayload = (datum: Date, period: string, userEmail: any) => {
+export const findMeetingsTimePayload = (datum: Date, period: string, userEmail: string) => {
   const startTime = format(datum, "yyyy-MM-dd'T'HH:mm:ss");
-  const endTime = format(datum, "yyyy-MM-dd'T'00:00:00");
+  const endTime = format(addHours(datum, 4), "yyyy-MM-dd'T'HH:mm:ss");
 
   const meetingDurationMin = Number(period) % 60;
   const meetingDurationHour = (Number(period) - meetingDurationMin) / 60;
   const meetingDuration = `${'PT' + meetingDurationHour + 'H' + meetingDurationMin + 'M'}`;
 
-  const data = {
+  const data: FindMeetingsTimeRequestPayload = {
     attendees: [{ type: 'resource', emailAddress: { address: userEmail } }],
     locationConstraint: {
       isRequired: false,
@@ -70,15 +70,15 @@ export const findMeetingsTimePayload = (datum: Date, period: string, userEmail: 
       activityDomain: 'work',
       timeSlots: [
         {
-          start: { dateTime: startTime, timeZone: 'UTC' },
-          end: { dateTime: endTime, timeZone: 'UTC' },
+          start: { dateTime: startTime, timeZone: 'Central European Standard Time' },
+          end: { dateTime: endTime, timeZone: 'Central European Standard Time' },
         },
       ],
     },
     isOrganizerOptional: false,
     meetingDuration: meetingDuration,
     returnSuggestionReasons: true,
-    minimumAttendeePercentage: 40,
+    minimumAttendeePercentage: 100,
   };
 
   return data;
