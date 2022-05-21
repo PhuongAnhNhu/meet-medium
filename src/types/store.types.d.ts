@@ -68,6 +68,12 @@ interface RoomSuggestionResponse {
   meetingTimeSuggestions: MeetingTimeSuggestion[];
 }
 
+interface EventMember {
+  emailAddress: {
+    address: string;
+  };
+  type: string;
+}
 interface EventPayload {
   subject: string;
   body: {
@@ -84,13 +90,6 @@ interface EventPayload {
   location: {
     displayName: string;
   };
-  attendees: [
-    {
-      emailAddress: {
-        address: string;
-      };
-      type: string;
-    },
-  ];
+  attendees: EventMember[];
   allowNewTimeProposals: boolean;
 }

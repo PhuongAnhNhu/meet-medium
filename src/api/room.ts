@@ -32,3 +32,16 @@ export async function postFindMeetingsTime(
     body: JSON.stringify(payload),
   }).then((response) => response.json());
 }
+
+export async function postEvent(accessToken: string, payload: EventPayload) {
+  const headers = new Headers();
+  const bearer = `Bearer ${accessToken}`;
+
+  headers.append('Authorization', bearer);
+  headers.append('content-type', 'application/json;charset=UTF-8');
+  return fetch(graphConfig.createEventEndpoint, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(payload),
+  }).then((respone) => respone.json());
+}

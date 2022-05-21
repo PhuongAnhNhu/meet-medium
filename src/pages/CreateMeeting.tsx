@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FormEvent, ChangeEvent, SyntheticEvent } from 'react';
+import React, { useEffect, useState, FormEvent, SyntheticEvent } from 'react';
 import { RootState, useAppDispatch } from 'store';
 import {
   Autocomplete,
@@ -16,9 +16,12 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { DateTimePicker } from '@mui/lab';
 import { useSelector } from 'react-redux';
 import { getRoomOptions, getTimeOptions } from '../helper/suggestion';
-import { findMeetingsTime } from 'store/features/roomSlice';
+import { createEvent, findMeetingsTime } from 'store/features/roomSlice';
+import { format } from 'date-fns';
 
-interface MeetingForm {
+const TIME_FORMAT = 'HH:mm';
+
+export interface MeetingForm {
   datetime: Date;
   period?: string;
   room?: string;
@@ -85,6 +88,7 @@ const CreateMeeting = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    dispatch(createEvent(formState));
   };
 
   return (
@@ -131,7 +135,14 @@ const CreateMeeting = () => {
             <FormControl>
               <RadioGroup name="timeslot" onChange={handleTimeslotChange}>
                 {timeOptions?.map((item, key) => {
-                  return <FormControlLabel key={key} value={key} control={<Radio />} label={`${item[0]}-${item[1]}`} />;
+                  return (
+                    <FormControlLabel
+                      key={key}
+                      value={key}
+                      control={<Radio />}
+                      label={`${format(new Date(item[0]), TIME_FORMAT)}-${format(new Date(item[1]), TIME_FORMAT)}`}
+                    />
+                  );
                 })}
               </RadioGroup>
             </FormControl>

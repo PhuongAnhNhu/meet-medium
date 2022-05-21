@@ -34,8 +34,8 @@ export const getTimeOptions = (raumName: string, meetingTimeSuggestions: Meeting
   // Bearbeiten timeList aaray damit FE einfacher zu benutzen
   const timeSuggestions = timeList.map((element: TimeSlotsItem) => {
     const temp = [];
-    temp.push(format(new Date(element.start.dateTime), 'HH:mm'));
-    temp.push(format(new Date(element.end.dateTime), 'HH:mm'));
+    temp.push(element.start.dateTime);
+    temp.push(element.end.dateTime);
     return temp;
   });
 

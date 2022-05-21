@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { eventPayload } from 'helper/payloadEvent';
 import { findMeetingsTimePayload } from 'helper/payloadFindMeetingsTime';
+import { MeetingForm } from 'pages/CreateMeeting';
 import { RootState } from 'store';
-import { getRoomList, postFindMeetingsTime } from '../../api/room';
+import { getRoomList, postEvent, postFindMeetingsTime } from '../../api/room';
 
 export interface RoomListState {
   roomList: Room[];
@@ -37,6 +39,20 @@ export const findMeetingsTime = createAsyncThunk<any, FindMeetingsTimePayload, {
       return response.meetingTimeSuggestions;
     }
     return Promise.reject('AccessToken or userProfile.mail is missing');
+  },
+);
+
+//postEvent
+export const createEvent = createAsyncThunk<any, MeetingForm, { state: RootState }>(
+  'room/createEvent',
+  async ({ datetime, room, timeslot }, { getState }) => {
+    const {
+      user: { accessToken },
+    } = getState();
+    if (accessToken) {
+      const payload = eventPayload(datetime, timeslot, room);
+      await postEvent(accessToken, payload);
+    }
   },
 );
 
