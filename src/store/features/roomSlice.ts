@@ -1,24 +1,44 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getRoomList, Room } from '../../api/room';
+import { findMeetingsTimePayload } from 'helper/payloadFindMeetingsTime';
+import { RootState } from 'store';
+import { getRoomList, postFindMeetingsTime } from '../../api/room';
 
 export interface RoomListState {
   roomList: Room[];
+  meetingTimeSuggestion: MeetingTimeSuggestion[];
   isLoading: boolean;
   error: unknown[];
 }
 
 const initialState: RoomListState = {
   roomList: [],
+  meetingTimeSuggestion: [],
   isLoading: false,
   error: [],
 };
 
-export const fetchRoomList = createAsyncThunk('roomList/fetchRoomList', async (accessToken: string) => {
+// getRoomList(accessToken);
+export const fetchRoomList = createAsyncThunk('room/fetchRoomList', async (accessToken: string) => {
   const response = await getRoomList(accessToken);
   return response.value;
 });
 
-// getRoomList(accessToken);
+//postFindMeetingsTime
+export const findMeetingsTime = createAsyncThunk<any, FindMeetingsTimePayload, { state: RootState }>(
+  'room/findMeetingsTime',
+  async ({ datetime, period }, { getState }) => {
+    const {
+      user: { accessToken, userProfile },
+    } = getState();
+
+    if (accessToken && userProfile?.mail) {
+      const payload = findMeetingsTimePayload(datetime, period, userProfile.mail);
+      const response = await postFindMeetingsTime(accessToken, payload);
+      return response.meetingTimeSuggestions;
+    }
+    return Promise.reject('AccessToken or userProfile.mail is missing');
+  },
+);
 
 export const roomSlice = createSlice({
   name: 'room',
@@ -31,6 +51,12 @@ export const roomSlice = createSlice({
         state.roomList = action.payload;
       })
       .addCase(fetchRoomList.rejected, (state, action) => {
+        state.error.push(action.payload);
+      })
+      .addCase(findMeetingsTime.fulfilled, (state, action) => {
+        state.meetingTimeSuggestion = action.payload;
+      })
+      .addCase(findMeetingsTime.rejected, (state, action) => {
         state.error.push(action.payload);
       });
   },

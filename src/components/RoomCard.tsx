@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, Chip, Divider, IconButton, Typography } from '@mui/material';
-import { Room } from 'api/room';
 import React from 'react';
 
 const RoomCard = ({ name, address }: Room) => {
@@ -9,15 +8,10 @@ const RoomCard = ({ name, address }: Room) => {
       <Divider />
       <CardContent>
         <Typography>Frei: </Typography>
-        <IconButton>
-          <Chip label="10:00 - 10:30" />
-        </IconButton>
-        <IconButton>
-          <Chip label="10:00 - 10:30" />
-        </IconButton>
-        <IconButton>
-          <Chip label="10:00 - 10:30" />
-        </IconButton>
+        <Chip label="10:00 - 10:30" />
+        <Chip label="10:00 - 10:30" />
+        <Chip label="10:00 - 10:30" />
+        ´´
       </CardContent>
     </Card>
   );
