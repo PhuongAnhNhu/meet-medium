@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card, CardContent, CardHeader } from '@mui/material';
 import { Box } from '@mui/system';
-import LoginButton from '../components/LoginButton';
-import { loginRequest } from '../authConfig';
+import LoginButton from '../../components/LoginButton';
+import { loginRequest } from '../../authConfig';
 import { useMsal } from '@azure/msal-react';
 
 const LoginPage = () => {

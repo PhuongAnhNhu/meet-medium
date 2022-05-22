@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomePage renders 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-1lmhv1o"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-container css-lt4bf8-MuiGrid-root"
+    />
+  </div>
+</div>
+`;

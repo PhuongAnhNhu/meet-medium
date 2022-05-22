@@ -2,9 +2,9 @@ import { Box, Grid } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from 'store';
-import { fetchRoomList } from '../store/features/roomSlice';
-import RoomCard from '../components/RoomCard';
-import { roomFilter } from '../helper/roomFilter';
+import { fetchRoomList } from '../../store/features/roomSlice';
+import RoomCard from '../../components/RoomCard';
+import { roomFilter } from '../../helper/roomFilter';
 
 const Homepage = () => {
   const dispatch = useAppDispatch();

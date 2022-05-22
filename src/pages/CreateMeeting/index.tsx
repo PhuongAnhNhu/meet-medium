@@ -18,7 +18,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { DateTimePicker } from '@mui/lab';
 import { useSelector } from 'react-redux';
-import { getRoomOptions, getTimeOptions } from '../helper/suggestion';
+import { getRoomOptions, getTimeOptions } from '../../helper/suggestion';
 import { createEvent, findMeetingsTime } from 'store/features/roomSlice';
 import { format } from 'date-fns';
 
