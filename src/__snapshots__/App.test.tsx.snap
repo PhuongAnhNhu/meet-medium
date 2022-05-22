@@ -105,7 +105,7 @@ exports[`renders learn react link 1`] = `
               href="/home"
             >
               <div
-                class="MuiListItemButton-root MuiListItemButton-gutters MuiButtonBase-root css-1avr7ju-MuiButtonBase-root-MuiListItemButton-root"
+                class="MuiListItemButton-root MuiListItemButton-gutters MuiButtonBase-root css-1fqi8hc-MuiButtonBase-root-MuiListItemButton-root"
                 role="button"
                 tabindex="0"
               >
@@ -142,7 +142,7 @@ exports[`renders learn react link 1`] = `
               href="/createMeeting"
             >
               <div
-                class="MuiListItemButton-root MuiListItemButton-gutters MuiButtonBase-root css-1avr7ju-MuiButtonBase-root-MuiListItemButton-root"
+                class="MuiListItemButton-root MuiListItemButton-gutters MuiButtonBase-root css-1fqi8hc-MuiButtonBase-root-MuiListItemButton-root"
                 role="button"
                 tabindex="0"
               >

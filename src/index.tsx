@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './index.css';
 import { store } from './store';
@@ -27,7 +27,9 @@ const theme = createTheme({
     },
   },
 });
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container!);
+root.render(
   <React.StrictMode>
     <MsalProvider instance={msalInstance}>
       <Provider store={store}>
@@ -37,5 +39,4 @@ ReactDOM.render(
       </Provider>
     </MsalProvider>
   </React.StrictMode>,
-  document.getElementById('root'),
 );

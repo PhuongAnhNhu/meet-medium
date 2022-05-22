@@ -3,8 +3,8 @@ import { wrapWithStore } from 'tests/wrappers';
 import CreateMeeting from '.';
 
 describe('CreateMeeting', () => {
-  beforeEach(() => {
-    jest.useFakeTimers().setSystemTime(new Date('2022-05-22'));
+  beforeAll(() => {
+    jest.useFakeTimers().setSystemTime(new Date('2022-01-01').getTime());
   });
 
   afterAll(() => {
