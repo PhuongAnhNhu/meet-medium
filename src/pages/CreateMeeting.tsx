@@ -104,7 +104,7 @@ const CreateMeeting = () => {
     dispatch(createEvent(formState));
   };
   return (
-    <Box mt={4} mr={2} sx={{ width: '100%' }}>
+    <Box mt={4} sx={{ width: '99%' }}>
       <form onSubmit={handleSubmit}>
         <Typography variant="h3">Raum Buchen</Typography>
         <FormControl margin="dense" fullWidth>
