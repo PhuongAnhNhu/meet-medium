@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { eventPayload } from 'helper/payloadEvent';
 import { findMeetingsTimePayload } from 'helper/payloadFindMeetingsTime';
+import { getRoomOptionsAddresse } from 'helper/suggestion';
 import { MeetingForm } from 'pages/CreateMeeting';
 import { RootState } from 'store';
 import { getRoomList, postEvent, postFindMeetingsTime } from '../../api/room';
@@ -45,12 +46,18 @@ export const findMeetingsTime = createAsyncThunk<any, FindMeetingsTimePayload, {
 //postEvent
 export const createEvent = createAsyncThunk<any, MeetingForm, { state: RootState }>(
   'room/createEvent',
-  async ({ datetime, room, timeslot }, { getState }) => {
+  async ({ room, timeslot }, { getState }) => {
     const {
       user: { accessToken },
     } = getState();
-    if (accessToken) {
-      const payload = eventPayload(datetime, timeslot, room);
+    const roomList = getRoomOptionsAddresse(getState().room.meetingTimeSuggestion);
+    const getRoomAddress = (room: string) => {
+      const roomAddress = roomList.find((element) => element.includes(room));
+      return roomAddress;
+    };
+    const roomAddress = room && getRoomAddress(room);
+    if (accessToken && room && timeslot && roomAddress) {
+      const payload = eventPayload(timeslot, room, roomAddress);
       await postEvent(accessToken, payload);
     }
   },

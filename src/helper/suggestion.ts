@@ -1,5 +1,3 @@
-import { format } from 'date-fns';
-
 export const getRoomOptions = (meetingTimeSuggestions: MeetingTimeSuggestion[]) => {
   const roomList: string[] = [];
 
@@ -40,4 +38,21 @@ export const getTimeOptions = (raumName: string, meetingTimeSuggestions: Meeting
   });
 
   return timeSuggestions;
+};
+
+export const getRoomOptionsAddresse = (meetingTimeSuggestions: MeetingTimeSuggestion[]) => {
+  const roomList: string[] = [];
+
+  const suggestionList = meetingTimeSuggestions?.map((meetingTimeSuggestion: MeetingTimeSuggestion) => {
+    return meetingTimeSuggestion.locations;
+  });
+
+  for (let i = 0; i < suggestionList?.length; i++) {
+    for (let j = 0; j < suggestionList[i].length; j++) {
+      if (!roomList.includes(suggestionList[i][j].locationEmailAddress)) {
+        roomList.push(suggestionList[i][j].locationEmailAddress);
+      }
+    }
+  }
+  return roomList;
 };
