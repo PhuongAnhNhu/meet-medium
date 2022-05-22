@@ -67,3 +67,29 @@ interface RoomSuggestionResponse {
   emptySuggestionsReason: string;
   meetingTimeSuggestions: MeetingTimeSuggestion[];
 }
+
+interface EventMember {
+  emailAddress: {
+    address: string;
+  };
+  type: string;
+}
+interface EventPayload {
+  subject: string;
+  body: {
+    contentType: string;
+  };
+  start: {
+    dateTime: string;
+    timeZone: string;
+  };
+  end: {
+    dateTime: string;
+    timeZone: string;
+  };
+  location: {
+    displayName: string;
+  };
+  attendees: EventMember[];
+  allowNewTimeProposals: boolean;
+}

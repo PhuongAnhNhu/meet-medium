@@ -1,5 +1,3 @@
-import { format } from 'date-fns';
-
 export const getRoomOptions = (meetingTimeSuggestions: MeetingTimeSuggestion[]) => {
   const roomList: string[] = [];
 
@@ -34,10 +32,27 @@ export const getTimeOptions = (raumName: string, meetingTimeSuggestions: Meeting
   // Bearbeiten timeList aaray damit FE einfacher zu benutzen
   const timeSuggestions = timeList.map((element: TimeSlotsItem) => {
     const temp = [];
-    temp.push(format(new Date(element.start.dateTime), 'HH:mm'));
-    temp.push(format(new Date(element.end.dateTime), 'HH:mm'));
+    temp.push(element.start.dateTime);
+    temp.push(element.end.dateTime);
     return temp;
   });
 
   return timeSuggestions;
+};
+
+export const getRoomOptionsAddresse = (meetingTimeSuggestions: MeetingTimeSuggestion[]) => {
+  const roomList: string[] = [];
+
+  const suggestionList = meetingTimeSuggestions?.map((meetingTimeSuggestion: MeetingTimeSuggestion) => {
+    return meetingTimeSuggestion.locations;
+  });
+
+  for (let i = 0; i < suggestionList?.length; i++) {
+    for (let j = 0; j < suggestionList[i].length; j++) {
+      if (!roomList.includes(suggestionList[i][j].locationEmailAddress)) {
+        roomList.push(suggestionList[i][j].locationEmailAddress);
+      }
+    }
+  }
+  return roomList;
 };

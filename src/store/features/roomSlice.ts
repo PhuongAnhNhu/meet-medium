@@ -1,13 +1,18 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { eventPayload } from 'helper/payloadEvent';
 import { findMeetingsTimePayload } from 'helper/payloadFindMeetingsTime';
+import { getRoomOptionsAddresse } from 'helper/suggestion';
+import { MeetingForm } from 'pages/CreateMeeting';
 import { RootState } from 'store';
-import { getRoomList, postFindMeetingsTime } from '../../api/room';
+import { getRoomList, postEvent, postFindMeetingsTime } from '../../api/room';
 
 export interface RoomListState {
   roomList: Room[];
   meetingTimeSuggestion: MeetingTimeSuggestion[];
   isLoading: boolean;
   error: unknown[];
+  created: boolean;
+  creating: boolean;
 }
 
 const initialState: RoomListState = {
@@ -15,6 +20,8 @@ const initialState: RoomListState = {
   meetingTimeSuggestion: [],
   isLoading: false,
   error: [],
+  created: false,
+  creating: false,
 };
 
 // getRoomList(accessToken);
@@ -40,6 +47,26 @@ export const findMeetingsTime = createAsyncThunk<any, FindMeetingsTimePayload, {
   },
 );
 
+//postEvent
+export const createEvent = createAsyncThunk<any, MeetingForm, { state: RootState }>(
+  'room/createEvent',
+  async ({ room, timeslot }, { getState }) => {
+    const {
+      user: { accessToken },
+    } = getState();
+    const roomList = getRoomOptionsAddresse(getState().room.meetingTimeSuggestion);
+    const getRoomAddress = (room: string) => {
+      const roomAddress = roomList.find((element) => element.includes(room));
+      return roomAddress;
+    };
+    const roomAddress = room && getRoomAddress(room);
+    if (accessToken && room && timeslot && roomAddress) {
+      const payload = eventPayload(timeslot, room, roomAddress);
+      await postEvent(accessToken, payload);
+    }
+  },
+);
+
 export const roomSlice = createSlice({
   name: 'room',
   initialState,
@@ -58,6 +85,14 @@ export const roomSlice = createSlice({
       })
       .addCase(findMeetingsTime.rejected, (state, action) => {
         state.error.push(action.payload);
+      })
+      .addCase(createEvent.pending, (state, action) => {
+        state.creating = true;
+        state.created = false;
+      })
+      .addCase(createEvent.fulfilled, (state, action) => {
+        state.creating = false;
+        state.created = true;
       });
   },
 });

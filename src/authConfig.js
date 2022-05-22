@@ -20,4 +20,5 @@ export const graphConfig = {
   graphMeEndpoint: 'https://graph.microsoft.com/v1.0/me',
   roomsEndpoint: 'https://graph.microsoft.com/beta/me/findRooms',
   findMeetingsTimeEndpoint: 'https://graph.microsoft.com/v1.0/me/findMeetingTimes',
+  createEventEndpoint: 'https://graph.microsoft.com/v1.0/me/events',
 };

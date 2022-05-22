@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FormEvent, ChangeEvent, SyntheticEvent } from 'react';
+import React, { useEffect, useState, FormEvent, SyntheticEvent } from 'react';
 import { RootState, useAppDispatch } from 'store';
 import {
   Autocomplete,
@@ -10,15 +10,21 @@ import {
   RadioGroup,
   TextField,
   Typography,
+  CircularProgress,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { DateTimePicker } from '@mui/lab';
 import { useSelector } from 'react-redux';
 import { getRoomOptions, getTimeOptions } from '../helper/suggestion';
-import { findMeetingsTime } from 'store/features/roomSlice';
+import { createEvent, findMeetingsTime } from 'store/features/roomSlice';
+import { format } from 'date-fns';
 
-interface MeetingForm {
+const TIME_FORMAT = 'HH:mm';
+
+export interface MeetingForm {
   datetime: Date;
   period?: string;
   room?: string;
@@ -36,6 +42,9 @@ const CreateMeeting = () => {
   const [formState, setFormState] = useState<MeetingForm>(initialFormState);
   const [roomOptions, setRoomOptions] = useState<string[]>([]);
   const [timeOptions, setTimeOptions] = useState<string[][]>([]);
+  const [open, setOpen] = useState<boolean>(false);
+
+  const { creating, created } = useSelector((state: RootState) => state.room);
 
   /**
    * Only used to get the timeOptions and the roomOptions
@@ -50,6 +59,15 @@ const CreateMeeting = () => {
       setRoomOptions(roomOptions);
     }
   }, [allMeetingData]);
+
+  useEffect(() => {
+    setOpen(created);
+    if (created) {
+      setFormState(initialFormState);
+      setTimeOptions([]);
+      setRoomOptions([]);
+    }
+  }, [created]);
 
   const handleDateTimeChange = (date: Date | null) => {
     date && setFormState((currentFormState) => ({ ...initialFormState, datetime: date }));
@@ -69,14 +87,12 @@ const CreateMeeting = () => {
   const handleRoomChange = (event: SyntheticEvent<Element, Event>, room: string | null) => {
     if (room) {
       setFormState((currentFormState) => ({ ...currentFormState, room }));
-
       const timeOptions = getTimeOptions(room, allMeetingData);
       setTimeOptions(timeOptions);
     }
   };
 
   const handleTimeslotChange = (event: any) => {
-    console.log(event);
     setFormState((currentFormState) => ({
       ...currentFormState,
       timeslot: timeOptions[event.target.value],
@@ -85,10 +101,10 @@ const CreateMeeting = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    dispatch(createEvent(formState));
   };
-
   return (
-    <Box mt={4} mr={2} sx={{ width: '100%' }}>
+    <Box mt={4} sx={{ width: '99%' }}>
       <form onSubmit={handleSubmit}>
         <Typography variant="h3">Raum Buchen</Typography>
         <FormControl margin="dense" fullWidth>
@@ -131,7 +147,14 @@ const CreateMeeting = () => {
             <FormControl>
               <RadioGroup name="timeslot" onChange={handleTimeslotChange}>
                 {timeOptions?.map((item, key) => {
-                  return <FormControlLabel key={key} value={key} control={<Radio />} label={`${item[0]}-${item[1]}`} />;
+                  return (
+                    <FormControlLabel
+                      key={key}
+                      value={key}
+                      control={<Radio />}
+                      label={`${format(new Date(item[0]), TIME_FORMAT)}-${format(new Date(item[1]), TIME_FORMAT)}`}
+                    />
+                  );
                 })}
               </RadioGroup>
             </FormControl>
@@ -139,9 +162,15 @@ const CreateMeeting = () => {
         )}
 
         <Button type="submit" variant="contained">
-          Buchen
+          {creating ? <CircularProgress size="1rem" color="secondary" /> : 'Buchen'}
         </Button>
       </form>
+
+      <Snackbar open={open} autoHideDuration={3000} onClose={() => setOpen(false)}>
+        <Alert severity="success" sx={{ width: '100%' }}>
+          Der Raum wurde gebucht!
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
