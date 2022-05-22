@@ -4,7 +4,7 @@ import CreateMeeting from '.';
 
 describe('CreateMeeting', () => {
   beforeAll(() => {
-    jest.useFakeTimers().setSystemTime(new Date('2022-01-01').getTime());
+    jest.useFakeTimers().setSystemTime(new Date('2022-01-01T01:00:00').getTime());
   });
 
   afterAll(() => {
