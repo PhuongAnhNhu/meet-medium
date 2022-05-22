@@ -18,7 +18,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { DateTimePicker } from '@mui/lab';
 import { useSelector } from 'react-redux';
-import { getRoomOptions, getTimeOptions } from '../helper/suggestion';
+import { getRoomOptions, getTimeOptions } from '../../helper/suggestion';
 import { createEvent, findMeetingsTime } from 'store/features/roomSlice';
 import { format } from 'date-fns';
 
@@ -31,14 +31,14 @@ export interface MeetingForm {
   timeslot?: string[];
 }
 
-const initialFormState: MeetingForm = {
-  datetime: new Date(),
-  period: '',
-  room: '',
-  timeslot: [],
-};
-
 const CreateMeeting = () => {
+  const initialFormState: MeetingForm = {
+    datetime: new Date(),
+    period: '',
+    room: '',
+    timeslot: [],
+  };
+
   const [formState, setFormState] = useState<MeetingForm>(initialFormState);
   const [roomOptions, setRoomOptions] = useState<string[]>([]);
   const [timeOptions, setTimeOptions] = useState<string[][]>([]);

@@ -11,7 +11,6 @@ const RoomCard = ({ name, address }: Room) => {
         <Chip label="10:00 - 10:30" />
         <Chip label="10:00 - 10:30" />
         <Chip label="10:00 - 10:30" />
-        ´´
       </CardContent>
     </Card>
   );
