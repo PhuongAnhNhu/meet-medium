@@ -10,6 +10,9 @@ import {
   RadioGroup,
   TextField,
   Typography,
+  CircularProgress,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -39,6 +42,9 @@ const CreateMeeting = () => {
   const [formState, setFormState] = useState<MeetingForm>(initialFormState);
   const [roomOptions, setRoomOptions] = useState<string[]>([]);
   const [timeOptions, setTimeOptions] = useState<string[][]>([]);
+  const [open, setOpen] = useState<boolean>(false);
+
+  const { creating, created } = useSelector((state: RootState) => state.room);
 
   /**
    * Only used to get the timeOptions and the roomOptions
@@ -53,6 +59,15 @@ const CreateMeeting = () => {
       setRoomOptions(roomOptions);
     }
   }, [allMeetingData]);
+
+  useEffect(() => {
+    setOpen(created);
+    if (created) {
+      setFormState(initialFormState);
+      setTimeOptions([]);
+      setRoomOptions([]);
+    }
+  }, [created]);
 
   const handleDateTimeChange = (date: Date | null) => {
     date && setFormState((currentFormState) => ({ ...initialFormState, datetime: date }));
@@ -72,14 +87,12 @@ const CreateMeeting = () => {
   const handleRoomChange = (event: SyntheticEvent<Element, Event>, room: string | null) => {
     if (room) {
       setFormState((currentFormState) => ({ ...currentFormState, room }));
-
       const timeOptions = getTimeOptions(room, allMeetingData);
       setTimeOptions(timeOptions);
     }
   };
 
   const handleTimeslotChange = (event: any) => {
-    console.log(event);
     setFormState((currentFormState) => ({
       ...currentFormState,
       timeslot: timeOptions[event.target.value],
@@ -90,7 +103,6 @@ const CreateMeeting = () => {
     event.preventDefault();
     dispatch(createEvent(formState));
   };
-
   return (
     <Box mt={4} mr={2} sx={{ width: '100%' }}>
       <form onSubmit={handleSubmit}>
@@ -150,9 +162,15 @@ const CreateMeeting = () => {
         )}
 
         <Button type="submit" variant="contained">
-          Buchen
+          {creating ? <CircularProgress size="1rem" color="secondary" /> : 'Buchen'}
         </Button>
       </form>
+
+      <Snackbar open={open} autoHideDuration={3000} onClose={() => setOpen(false)}>
+        <Alert severity="success" sx={{ width: '100%' }}>
+          Der Raum wurde gebucht!
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

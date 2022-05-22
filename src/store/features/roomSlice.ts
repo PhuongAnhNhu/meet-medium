@@ -11,6 +11,8 @@ export interface RoomListState {
   meetingTimeSuggestion: MeetingTimeSuggestion[];
   isLoading: boolean;
   error: unknown[];
+  created: boolean;
+  creating: boolean;
 }
 
 const initialState: RoomListState = {
@@ -18,6 +20,8 @@ const initialState: RoomListState = {
   meetingTimeSuggestion: [],
   isLoading: false,
   error: [],
+  created: false,
+  creating: false,
 };
 
 // getRoomList(accessToken);
@@ -81,6 +85,14 @@ export const roomSlice = createSlice({
       })
       .addCase(findMeetingsTime.rejected, (state, action) => {
         state.error.push(action.payload);
+      })
+      .addCase(createEvent.pending, (state, action) => {
+        state.creating = true;
+        state.created = false;
+      })
+      .addCase(createEvent.fulfilled, (state, action) => {
+        state.creating = false;
+        state.created = true;
       });
   },
 });
