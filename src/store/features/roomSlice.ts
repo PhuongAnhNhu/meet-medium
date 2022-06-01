@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { eventPayload } from 'helper/payloadEvent';
 import { findMeetingsTimePayload } from 'helper/payloadFindMeetingsTime';
 import { getRoomOptionsAddresse } from 'helper/suggestion';
-import { MeetingForm } from 'pages/CreateMeeting';
 import { RootState } from 'store';
 import { getRoomList, postEvent, postFindMeetingsTime } from '../../api/room';
 

@@ -99,3 +99,10 @@ interface roomWithTimeslot {
   address: string;
   timeslot: TimeSlotsItem[];
 }
+
+interface MeetingForm {
+  datetime: Date;
+  period?: string;
+  room?: string;
+  timeslot?: string[];
+}
