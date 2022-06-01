@@ -24,13 +24,6 @@ import { format } from 'date-fns';
 
 const TIME_FORMAT = 'HH:mm';
 
-export interface MeetingForm {
-  datetime: Date;
-  period?: string;
-  room?: string;
-  timeslot?: string[];
-}
-
 const CreateMeeting = () => {
   const initialFormState: MeetingForm = {
     datetime: new Date(),

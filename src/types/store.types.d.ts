@@ -93,3 +93,16 @@ interface EventPayload {
   attendees: EventMember[];
   allowNewTimeProposals: boolean;
 }
+
+interface roomWithTimeslot {
+  name: string;
+  address: string;
+  timeslot: TimeSlotsItem[];
+}
+
+interface MeetingForm {
+  datetime: Date;
+  period?: string;
+  room?: string;
+  timeslot?: string[];
+}
