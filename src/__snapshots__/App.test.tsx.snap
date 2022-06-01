@@ -38,7 +38,7 @@ exports[`renders learn react link 1`] = `
           <div
             class="MuiTypography-root MuiTypography-h6 css-1juivf6-MuiTypography-root"
           >
-            Logo
+            MeetMedium
           </div>
           <button
             aria-haspopup="true"
