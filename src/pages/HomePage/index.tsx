@@ -20,8 +20,7 @@ const Homepage = () => {
   const roomInBerlin = roomFilter(roomList);
   const data = getRoomListDashboard(roomInBerlin, meetingTimeSuggestion);
 
-  console.log(data);
-  const period = '10';
+  const period = '15';
   useEffect(() => {
     const datetime = new Date();
     if (accessToken) {

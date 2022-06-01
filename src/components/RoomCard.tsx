@@ -1,12 +1,20 @@
 import { Card, CardContent, CardHeader, Chip, Divider, Typography } from '@mui/material';
 import { format } from 'date-fns';
+import { getRoomName } from 'helper/getRoomName';
 import React from 'react';
+import { useAppDispatch } from 'store';
+import { createEvent } from 'store/features/roomSlice';
 
 const TIME_FORMAT = 'HH:mm';
 
-const RoomCard = ({ name, address, timeslot }: roomWithTimeslot) => {
-  const handleClick = () => {
-    console.info('You clicked the Chip.');
+const RoomCard = ({ name, timeslot }: roomWithTimeslot) => {
+  const dispatch = useAppDispatch();
+  const roomName = getRoomName(name);
+
+  const handleClick = (item: TimeSlotsItem) => {
+    const time = [item.start.dateTime, item.end.dateTime];
+    const data = { datetime: new Date(), pariod: '15', room: roomName, timeslot: time };
+    dispatch(createEvent(data));
   };
   return (
     <Card>
@@ -20,8 +28,9 @@ const RoomCard = ({ name, address, timeslot }: roomWithTimeslot) => {
             <Chip
               variant="outlined"
               key={index}
+              clickable={true}
               size="small"
-              onClick={handleClick}
+              onClick={() => handleClick(item)}
               label={`${format(new Date(item.start.dateTime), TIME_FORMAT)}-${format(
                 new Date(item.end.dateTime),
                 TIME_FORMAT,
