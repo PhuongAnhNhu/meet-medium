@@ -24,6 +24,7 @@ deploy-job:
   before_script:
     - apt-get update
     - apt-get install sshpass
+    - mkdir ~/.ssh
     - ssh-keyscan -t rsa test7.exozet.com >> ~/.ssh/known_hosts
   script:
     - npm install
