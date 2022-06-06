@@ -2,6 +2,8 @@ image: node:16
 
 stages: # List of stages for jobs, and their order of execution
   - test
+  - build
+  - deploy
 
 unit-test-job: # This job runs in the test stage.
   stage: test # It only starts when the job in the build stage completes successfully.
@@ -9,3 +11,19 @@ unit-test-job: # This job runs in the test stage.
     - npm install
   script:
     - npm run test
+
+build-job:
+  stage: build
+  script:
+    - npm install
+    - npm run build
+
+deploy-job:
+  stage: deploy
+  needs: [unit-test-job, build-job]
+  before_script:
+    - apk add --update --no-cache openssh sshpass
+  script:
+    - npm install
+    - npm run build
+    - sshpass -p "$DEPLOY_SERVER_KEY" scp -r ./build "$DEPLOY_SERVER_USER"@test7.exozet.com/srv/htdocs/meetmedium/public
