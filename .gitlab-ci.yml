@@ -22,7 +22,8 @@ deploy-job:
   stage: deploy
   needs: [unit-test-job, build-job]
   before_script:
-    - apk add --update --no-cache openssh sshpass
+    - apt-get update
+    - apt-get install openssh sshpass
   script:
     - npm install
     - npm run build
