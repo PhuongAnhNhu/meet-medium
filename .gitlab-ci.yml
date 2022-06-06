@@ -23,7 +23,7 @@ deploy-job:
   needs: [unit-test-job, build-job]
   before_script:
     - apt-get update
-    - apt-get install openssh sshpass
+    - apt-get install sshpass
   script:
     - npm install
     - npm run build
