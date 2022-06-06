@@ -24,7 +24,8 @@ deploy-job:
   before_script:
     - apt-get update
     - apt-get install sshpass
+    - ssh-keyscan -t rsa test7.exozet.com >> ~/.ssh/known_hosts
   script:
     - npm install
     - npm run build
-    - sshpass -p Ex0zet scp -r ./build php@test7.exozet.com:/srv/htdocs/meetmedium/public
+    - sshpass -p "$DEPLOY_SERVER_KEY" scp -r ./build php@test7.exozet.com:/srv/htdocs/meetmedium/public
