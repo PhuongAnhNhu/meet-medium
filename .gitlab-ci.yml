@@ -25,7 +25,6 @@ deploy-job:
     - apt-get update
     - apt-get install sshpass
   script:
-    - echo "$DEPLOY_SERVER_KEY"
     - npm install
     - npm run build
-    - sshpass -p Ex0zet scp -r ./build "${DEPLOY_SERVER_USER}@test7.exozet.com:/srv/htdocs/meetmedium/public"
+    - sshpass -p $DEPLOY_SERVER_KEY" scp -r ./build php@test7.exozet.com:/srv/htdocs/meetmedium/public
