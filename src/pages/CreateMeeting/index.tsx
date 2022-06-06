@@ -60,6 +60,7 @@ const CreateMeeting = () => {
       setTimeOptions([]);
       setRoomOptions([]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [created]);
 
   const handleDateTimeChange = (date: Date | null) => {

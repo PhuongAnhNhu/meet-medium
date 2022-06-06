@@ -1,6 +1,1 @@
-export const roomFilter = (roomList: Room[]) =>
-  roomList?.filter((room: Room) => {
-    if (room.name.includes('Berlin')) {
-      return room;
-    }
-  });
+export const roomFilter = (roomList: Room[]): Room[] => roomList.filter((room: Room) => room.name.includes('Berlin'));

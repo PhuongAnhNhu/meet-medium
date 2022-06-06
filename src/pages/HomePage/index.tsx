@@ -5,7 +5,6 @@ import { RootState, useAppDispatch } from 'store';
 import { fetchRoomList, findMeetingsTime } from '../../store/features/roomSlice';
 import RoomCard from '../../components/RoomCard';
 import { roomFilter } from '../../helper/roomFilter';
-import { getRoomOptions } from 'helper/suggestion';
 import { getRoomListDashboard } from 'helper/dashboardData';
 
 const Homepage = () => {
