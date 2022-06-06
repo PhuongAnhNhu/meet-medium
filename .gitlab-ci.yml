@@ -29,4 +29,4 @@ deploy-job:
   script:
     - npm install
     - npm run build
-    - sshpass -p "$DEPLOY_SERVER_KEY" scp -r ./build php@test7.exozet.com:/srv/htdocs/meetmedium/public
+    - sshpass -p "$DEPLOY_SERVER_KEY" scp -r ./build/* php@test7.exozet.com:/srv/htdocs/meetmedium/public
