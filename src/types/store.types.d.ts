@@ -19,11 +19,11 @@ interface LocationConstraintItem {
 interface TimeSlotsItem {
   start: {
     dateTime: string;
-    timeZone?: string;
+    timeZone: string;
   };
   end: {
     dateTime: string;
-    timeZone?: string;
+    timeZone: string;
   };
 }
 

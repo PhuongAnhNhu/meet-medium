@@ -5,7 +5,6 @@ import { RootState, useAppDispatch } from 'store';
 import { fetchRoomList, findMeetingsTime } from '../../store/features/roomSlice';
 import RoomCard from '../../components/RoomCard';
 import { roomFilter } from '../../helper/roomFilter';
-import { getRoomOptions } from 'helper/suggestion';
 import { getRoomListDashboard } from 'helper/dashboardData';
 
 const Homepage = () => {
@@ -20,8 +19,7 @@ const Homepage = () => {
   const roomInBerlin = roomFilter(roomList);
   const data = getRoomListDashboard(roomInBerlin, meetingTimeSuggestion);
 
-  console.log(data);
-  const period = '10';
+  const period = '15';
   useEffect(() => {
     const datetime = new Date();
     if (accessToken) {

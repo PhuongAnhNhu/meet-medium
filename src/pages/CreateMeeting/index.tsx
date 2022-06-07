@@ -60,6 +60,7 @@ const CreateMeeting = () => {
       setTimeOptions([]);
       setRoomOptions([]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [created]);
 
   const handleDateTimeChange = (date: Date | null) => {
@@ -95,6 +96,7 @@ const CreateMeeting = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(createEvent(formState));
+    debugger;
   };
   return (
     <Box mt={4} sx={{ width: '99%' }}>
