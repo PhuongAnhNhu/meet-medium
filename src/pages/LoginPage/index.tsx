@@ -20,7 +20,7 @@ const LoginPage = () => {
           <CardContent>
             <LoginButton
               onLogin={() =>
-                instance.loginRedirect(loginRequest).catch((e) => {
+                instance.loginPopup(loginRequest).catch((e) => {
                   console.error(e);
                 })
               }
