@@ -1,7 +1,7 @@
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';
 import { useEffect } from 'react';
-import { useAppDispatch } from 'store';
-import { fetchUserProfile, setAccessToken, setIsLoggedIn } from 'store/features/userSlice';
+import { RootState, useAppDispatch } from 'store';
+import { fetchUserProfile, setAccessToken } from 'store/features/userSlice';
 import { loginRequest } from './authConfig';
 import './App.css';
 import AppRoutes from './Routes';
@@ -14,8 +14,6 @@ function App() {
   const isAuthenticated = useIsAuthenticated();
 
   useEffect(() => {
-    dispatch(setIsLoggedIn(isAuthenticated));
-
     if (isAuthenticated) {
       const request = {
         ...loginRequest,
@@ -24,6 +22,7 @@ function App() {
       instance.acquireTokenSilent(request).then(({ accessToken }) => {
         dispatch(setAccessToken(accessToken));
         dispatch(fetchUserProfile(accessToken));
+        window.localStorage.setItem('meetmediumToken', accessToken);
       });
     }
   }, [accounts, dispatch, instance, isAuthenticated]);

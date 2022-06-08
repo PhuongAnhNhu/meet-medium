@@ -51,6 +51,7 @@ const Header = ({ open, drawerOpen }: AppBarProps) => {
       .catch((e) => {
         console.error(e);
       });
+    window.localStorage.clear();
   };
   return (
     <AppHeader position="fixed" open={open}>
