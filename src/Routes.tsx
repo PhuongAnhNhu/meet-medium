@@ -3,8 +3,6 @@ import { Navigate, RouteObject, useRoutes } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import CreateMeeting from './pages/CreateMeeting';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store';
 import HomeLayout from 'layout/HomeLayout';
 import { useIsAuthenticated } from '@azure/msal-react';
 

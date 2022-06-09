@@ -1,6 +1,6 @@
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';
 import { useEffect } from 'react';
-import { RootState, useAppDispatch } from 'store';
+import { useAppDispatch } from 'store';
 import { fetchUserProfile, setAccessToken } from 'store/features/userSlice';
 import { loginRequest } from './authConfig';
 import './App.css';
