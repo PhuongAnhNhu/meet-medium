@@ -24,17 +24,14 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setIsLoggedIn: (state, action: PayloadAction<boolean>) => {
-      state.isLoggedIn = action.payload;
-    },
     setAccessToken: (state, action: PayloadAction<string>) => {
       state.accessToken = action.payload;
+      state.isLoggedIn = true;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserProfile.fulfilled, (state, action) => {
-        // console.log(action.payload);
         state.userProfile = action.payload;
       })
       .addCase(fetchUserProfile.rejected, (state, action) => {
@@ -43,6 +40,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setIsLoggedIn, setAccessToken } = userSlice.actions;
+export const { setAccessToken } = userSlice.actions;
 
 export default userSlice.reducer;
