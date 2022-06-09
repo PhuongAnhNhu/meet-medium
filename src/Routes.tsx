@@ -10,10 +10,11 @@ import { useIsAuthenticated } from '@azure/msal-react';
 
 const routes: (isLoggedIn: boolean) => RouteObject[] = (isLoggedIn) => [
   {
+    path: '/',
     element: <HomeLayout />,
     children: [
       {
-        path: '/',
+        path: '/home',
         element: isLoggedIn ? <HomePage /> : <Navigate to="/login" />,
       },
       {
@@ -24,7 +25,7 @@ const routes: (isLoggedIn: boolean) => RouteObject[] = (isLoggedIn) => [
   },
   {
     path: 'login',
-    element: !isLoggedIn ? <LoginPage /> : <Navigate to="/" />,
+    element: !isLoggedIn ? <LoginPage /> : <Navigate to="/home" />,
   },
 ];
 

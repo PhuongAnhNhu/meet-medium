@@ -71,7 +71,7 @@ const LeftMenu = ({ open, drawerClose }: LeftMenuProps) => {
       </DrawerHeader>
       <Divider />
       <List>
-        <Link to="/">
+        <Link to="/home">
           <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5 }}>
             <ListItemIcon
               sx={{

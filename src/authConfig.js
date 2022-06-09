@@ -2,7 +2,8 @@ export const msalConfig = {
   auth: {
     clientId: '39fa234e-c52f-46e0-8846-2fcab179df08',
     authority: 'https://login.microsoftonline.com/0b3fc178-b730-4e8b-9843-e81259237b77', // This is a URL (e.g. https://login.microsoftonline.com/{your tenant ID})
-    redirectUri: 'http://localhost:3000',
+    redirectUri:
+      process.env.NODE_ENV === 'production' ? 'https://meetmedium.test7.exozet.com' : 'http://localhost:3000',
   },
   cache: {
     cacheLocation: 'sessionStorage', // This configures where your cache will be stored
