@@ -17,7 +17,7 @@ const routes: (isLoggedIn: boolean) => RouteObject[] = (isLoggedIn) => [
       },
       {
         path: 'createMeeting',
-        element: <CreateMeeting />,
+        element: isLoggedIn ? <CreateMeeting /> : <Navigate to="/login" />,
       },
     ],
   },
