@@ -20,8 +20,8 @@ exports[`CreateMeeting renders 1`] = `
           <label
             class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
             data-shrink="true"
-            for=":r0:"
-            id=":r0:-label"
+            for="mui-1"
+            id="mui-1-label"
           >
             Datum
           </label>
@@ -33,7 +33,7 @@ exports[`CreateMeeting renders 1`] = `
               aria-label="Choose date, selected date is Jan 1, 2022"
               aria-readonly="true"
               class="MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-              id=":r0:"
+              id="mui-1"
               name="datetime"
               readonly=""
               type="text"
@@ -106,8 +106,8 @@ exports[`CreateMeeting renders 1`] = `
             <label
               class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary Mui-disabled css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
               data-shrink="false"
-              for=":r3:"
-              id=":r3:-label"
+              for="mui-4"
+              id="mui-4-label"
             >
               Raum
             </label>
@@ -122,7 +122,7 @@ exports[`CreateMeeting renders 1`] = `
                 autocomplete="off"
                 class="MuiOutlinedInput-input MuiInputBase-input Mui-disabled MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-nxo287-MuiInputBase-input-MuiOutlinedInput-input"
                 disabled=""
-                id=":r3:"
+                id="mui-4"
                 name="roomname"
                 role="combobox"
                 spellcheck="false"
