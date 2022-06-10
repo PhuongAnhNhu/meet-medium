@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, Chip, Divider, Typography } from '@mui/material';
-import { format } from 'date-fns';
+import { addHours, format } from 'date-fns';
 import { getRoomName } from 'helper/getRoomName';
 import React from 'react';
 import { useAppDispatch } from 'store';
@@ -31,8 +31,8 @@ const RoomCard = ({ name, timeslot }: roomWithTimeslot) => {
               clickable={true}
               size="small"
               onClick={() => handleClick(item)}
-              label={`${format(new Date(item.start.dateTime), TIME_FORMAT)}-${format(
-                new Date(item.end.dateTime),
+              label={`${format(addHours(new Date(item.start.dateTime), 2), TIME_FORMAT)}-${format(
+                addHours(new Date(item.end.dateTime), 2),
                 TIME_FORMAT,
               )}`}
               sx={{ marginBottom: '0.2rem', marginRight: '0.2rem' }}

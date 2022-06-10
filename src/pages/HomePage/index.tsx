@@ -1,5 +1,5 @@
-import { Box, Grid } from '@mui/material';
-import React, { useEffect } from 'react';
+import { Alert, Box, Grid, Snackbar } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from 'store';
 import { fetchRoomList, findMeetingsTime } from '../../store/features/roomSlice';
@@ -10,8 +10,11 @@ import { getRoomListDashboard } from 'helper/dashboardData';
 
 const datetime = new Date();
 const Homepage = () => {
+  const [open, setOpen] = useState<boolean>(false);
+
+  const { created } = useSelector((state: RootState) => state.room);
+  console.log(created);
   const dispatch = useAppDispatch();
-  // const accessToken = localStorage.getItem('meetmediumToken');
   const accessToken = useSelector((state: RootState) => state.user.accessToken);
 
   //Get RoomList
@@ -38,9 +41,17 @@ const Homepage = () => {
     dispatch(findMeetingsTime({ datetime, period }));
   }, [accessToken, dispatch]);
 
+  useEffect(() => {
+    setOpen(created);
+    if (created) {
+      accessToken && dispatch(fetchRoomList(accessToken));
+      dispatch(findMeetingsTime({ datetime, period }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [created]);
+
   return (
     <Box mt={4} mr={2}>
-      <h1>HOMEPAGE</h1>
       <Grid container rowSpacing={2} columnSpacing={{ sm: 2, md: 1 }}>
         {data.map((room: any) => (
           <Grid key={room.name} item xs={10} sm={6} md={4}>
@@ -48,6 +59,11 @@ const Homepage = () => {
           </Grid>
         ))}
       </Grid>
+      <Snackbar open={open} autoHideDuration={3000} onClose={() => setOpen(false)}>
+        <Alert severity="success" sx={{ width: '100%' }}>
+          Der Raum wurde gebucht!
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

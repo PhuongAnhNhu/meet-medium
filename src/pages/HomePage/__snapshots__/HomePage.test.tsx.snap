@@ -5,9 +5,6 @@ exports[`HomePage renders 1`] = `
   <div
     class="MuiBox-root css-1lmhv1o"
   >
-    <h1>
-      HOMEPAGE
-    </h1>
     <div
       class="MuiGrid-root MuiGrid-container css-lt4bf8-MuiGrid-root"
     />
