@@ -15,10 +15,14 @@ const Homepage = () => {
   const dispatch = useAppDispatch();
   const accessToken = useSelector((state: RootState) => state.user.accessToken);
 
+  const { created } = useSelector((state: RootState) => state.room);
+
   //Get RoomList
   const roomList = useSelector((state: RootState) => state.room.roomList);
 
   const meetingTimeSuggestion = useSelector((state: RootState) => state.room.meetingTimeSuggestion);
+
+  console.log(meetingTimeSuggestion);
 
   const roomInBerlin = roomFilter(roomList);
   const data = getRoomListDashboard(roomInBerlin, meetingTimeSuggestion);
@@ -30,6 +34,14 @@ const Homepage = () => {
       dispatch(findMeetingsTime({ datetime, period }));
     }
   }, [accessToken, dispatch]);
+
+  useEffect(() => {
+    setOpen(created);
+    if (created) {
+      dispatch(findMeetingsTime({ datetime, period }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [created]);
 
   return (
     <Box mt={4} mr={2}>
