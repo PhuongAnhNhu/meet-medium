@@ -12,8 +12,6 @@ const datetime = new Date();
 const Homepage = () => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const { created } = useSelector((state: RootState) => state.room);
-  console.log(created);
   const dispatch = useAppDispatch();
   const accessToken = useSelector((state: RootState) => state.user.accessToken);
 
