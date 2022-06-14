@@ -12,8 +12,6 @@ const datetime = new Date();
 const Homepage = () => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const { created } = useSelector((state: RootState) => state.room);
-  console.log(created);
   const dispatch = useAppDispatch();
   const accessToken = useSelector((state: RootState) => state.user.accessToken);
 
@@ -22,33 +20,16 @@ const Homepage = () => {
 
   const meetingTimeSuggestion = useSelector((state: RootState) => state.room.meetingTimeSuggestion);
 
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     navigate('.');
-  //   }, 1000);
-  //   setTimeout(() => {
-  //     navigate('.');
-  //   }, 10000);
-  // }, []);
-
   const roomInBerlin = roomFilter(roomList);
   const data = getRoomListDashboard(roomInBerlin, meetingTimeSuggestion);
   const period = '15';
 
   useEffect(() => {
-    accessToken && dispatch(fetchRoomList(accessToken));
-    dispatch(findMeetingsTime({ datetime, period }));
-  }, [accessToken, dispatch]);
-
-  useEffect(() => {
-    setOpen(created);
-    if (created) {
-      accessToken && dispatch(fetchRoomList(accessToken));
+    if (accessToken) {
+      dispatch(fetchRoomList(accessToken));
       dispatch(findMeetingsTime({ datetime, period }));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [created]);
+  }, [accessToken, dispatch]);
 
   return (
     <Box mt={4} mr={2}>

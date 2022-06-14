@@ -31,8 +31,8 @@ const RoomCard = ({ name, timeslot }: roomWithTimeslot) => {
               clickable={true}
               size="small"
               onClick={() => handleClick(item)}
-              label={`${format(addHours(new Date(item.start.dateTime), 2), TIME_FORMAT)}-${format(
-                addHours(new Date(item.end.dateTime), 2),
+              label={`${format(addHours(new Date(item.start.dateTime), 0), TIME_FORMAT)}-${format(
+                addHours(new Date(item.end.dateTime), 0),
                 TIME_FORMAT,
               )}`}
               sx={{ marginBottom: '0.2rem', marginRight: '0.2rem' }}
