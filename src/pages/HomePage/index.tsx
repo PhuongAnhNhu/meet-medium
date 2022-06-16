@@ -16,8 +16,6 @@ const Homepage = () => {
   const accessToken = localStorage.getItem('meetmediumToken');
 
   const userMail = useSelector((state: RootState) => state.user.userProfile?.mail);
-
-  console.log(userMail);
   const { created } = useSelector((state: RootState) => state.room);
 
   //Get RoomList
@@ -42,7 +40,6 @@ const Homepage = () => {
 
   useEffect(() => {
     setOpen(created);
-
     accessToken && userMail && created && dispatch(findMeetingsTime({ datetime, period, userMail, accessToken }));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

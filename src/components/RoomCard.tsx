@@ -18,9 +18,9 @@ const RoomCard = ({ name, timeslot }: roomWithTimeslot) => {
   };
   return (
     <Card>
-      <CardHeader title={name} sx={{ backgroundColor: 'primary.main', maxHeight: 30, minHeight: 30 }}></CardHeader>
+      <CardHeader title={name} sx={{ backgroundColor: 'primary.main', maxHeight: 40, minHeight: 35 }}></CardHeader>
       <Divider />
-      <CardContent sx={{ height: 57 }}>
+      <CardContent sx={{ height: 65 }}>
         {timeslot.length === 0 && <Typography>Ausgebucht</Typography>}
 
         {timeslot.map((item, index) => {
