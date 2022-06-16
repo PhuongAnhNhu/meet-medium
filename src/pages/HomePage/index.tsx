@@ -6,14 +6,14 @@ import { fetchRoomList, findMeetingsTime } from '../../store/features/roomSlice'
 import RoomCard from '../../components/RoomCard';
 import { roomFilter } from '../../helper/roomFilter';
 import { getRoomListDashboard } from 'helper/dashboardData';
-// import { useNavigate } from 'react-router-dom';
+import { fetchUserProfile } from 'store/features/userSlice';
 
 const datetime = new Date();
 const Homepage = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
-  const accessToken = useSelector((state: RootState) => state.user.accessToken);
+  const accessToken = localStorage.getItem('meetmediumToken');
 
   const { created } = useSelector((state: RootState) => state.room);
 
@@ -22,18 +22,22 @@ const Homepage = () => {
 
   const meetingTimeSuggestion = useSelector((state: RootState) => state.room.meetingTimeSuggestion);
 
-  console.log(meetingTimeSuggestion);
-
   const roomInBerlin = roomFilter(roomList);
   const data = getRoomListDashboard(roomInBerlin, meetingTimeSuggestion);
   const period = '15';
+
+  useEffect(() => {
+    accessToken && dispatch(fetchUserProfile(accessToken));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accessToken]);
 
   useEffect(() => {
     if (accessToken) {
       dispatch(fetchRoomList(accessToken));
       dispatch(findMeetingsTime({ datetime, period }));
     }
-  }, [accessToken, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accessToken]);
 
   useEffect(() => {
     setOpen(created);
