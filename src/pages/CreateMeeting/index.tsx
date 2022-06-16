@@ -39,6 +39,9 @@ const CreateMeeting = () => {
 
   const { creating, created } = useSelector((state: RootState) => state.room);
 
+  const accessToken = localStorage.getItem('meetmediumToken');
+
+  const userMail = useSelector((state: RootState) => state.user.userProfile?.mail);
   /**
    * Only used to get the timeOptions and the roomOptions
    */
@@ -70,8 +73,8 @@ const CreateMeeting = () => {
   const handleChangePeriod = (event: React.ChangeEvent<HTMLInputElement>) => {
     const period = event.target.value;
     setFormState((currentFormState) => ({ ...currentFormState, period, room: '' }));
-    if (period) {
-      dispatch(findMeetingsTime({ datetime: formState.datetime, period }));
+    if (period && accessToken && userMail) {
+      dispatch(findMeetingsTime({ datetime: formState.datetime, period, accessToken, userMail }));
     }
     if (!period) {
       setTimeOptions([]);

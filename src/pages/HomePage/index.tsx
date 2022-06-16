@@ -15,6 +15,9 @@ const Homepage = () => {
   const dispatch = useAppDispatch();
   const accessToken = localStorage.getItem('meetmediumToken');
 
+  const userMail = useSelector((state: RootState) => state.user.userProfile?.mail);
+
+  console.log(userMail);
   const { created } = useSelector((state: RootState) => state.room);
 
   //Get RoomList
@@ -28,22 +31,20 @@ const Homepage = () => {
 
   useEffect(() => {
     accessToken && dispatch(fetchUserProfile(accessToken));
+    accessToken && dispatch(fetchRoomList(accessToken));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessToken]);
+  }, [dispatch, accessToken]);
 
   useEffect(() => {
-    if (accessToken) {
-      dispatch(fetchRoomList(accessToken));
-      dispatch(findMeetingsTime({ datetime, period }));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessToken]);
+    accessToken && userMail && dispatch(findMeetingsTime({ datetime, period, accessToken, userMail }));
+  }, [dispatch, userMail, accessToken]);
 
   useEffect(() => {
     setOpen(created);
-    if (created) {
-      dispatch(findMeetingsTime({ datetime, period }));
-    }
+
+    accessToken && userMail && created && dispatch(findMeetingsTime({ datetime, period, userMail, accessToken }));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [created]);
 

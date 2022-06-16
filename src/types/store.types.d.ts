@@ -30,6 +30,8 @@ interface TimeSlotsItem {
 interface FindMeetingsTimePayload {
   datetime: Date;
   period: string;
+  accessToken: string;
+  userMail: string;
 }
 
 interface FindMeetingsTimeRequestPayload {

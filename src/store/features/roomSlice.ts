@@ -32,13 +32,9 @@ export const fetchRoomList = createAsyncThunk('room/fetchRoomList', async (acces
 //postFindMeetingsTime
 export const findMeetingsTime = createAsyncThunk<any, FindMeetingsTimePayload, { state: RootState }>(
   'room/findMeetingsTime',
-  async ({ datetime, period }, { getState }) => {
-    const {
-      user: { accessToken, userProfile },
-    } = getState();
-
-    if (accessToken && userProfile?.mail) {
-      const payload = findMeetingsTimePayload(datetime, period, userProfile.mail);
+  async ({ datetime, period, accessToken, userMail }) => {
+    if (accessToken && userMail) {
+      const payload = findMeetingsTimePayload(datetime, period, userMail);
       const response = await postFindMeetingsTime(accessToken, payload);
       return response.meetingTimeSuggestions;
     }
