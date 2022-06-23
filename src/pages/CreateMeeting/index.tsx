@@ -30,7 +30,10 @@ const CreateMeeting = () => {
     period: '',
     room: '',
     timeslot: [],
+    // address: ''
+    //roomadresse soll auch mit schicken
   };
+  //check ob room address von state holen kann? damit in createevent kein roomadress finden mussen
 
   const [formState, setFormState] = useState<MeetingForm>(initialFormState);
   const [roomOptions, setRoomOptions] = useState<string[]>([]);
@@ -46,7 +49,7 @@ const CreateMeeting = () => {
    * Only used to get the timeOptions and the roomOptions
    */
   const allMeetingData = useSelector((state: RootState) => state.room.meetingTimeSuggestion);
-
+  console.log('CREATE ALLMEETINGDATA', allMeetingData); // gibt auch roomadresse zurück
   const dispatch = useAppDispatch();
 
   useEffect(() => {

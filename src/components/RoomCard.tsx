@@ -7,7 +7,8 @@ const TIME_FORMAT = 'HH:mm';
 
 const RoomCard = ({ name, timeslot, bookingData }: roomWithTimeslot) => {
   const roomName = getRoomName(name);
-
+  // console.log(name);
+  // kann  Address Room von Homepage per props holen -> brauche in createEvent kein address suchen
   const handleClick = (item: TimeSlotsItem) => {
     const time = [item.start.dateTime, item.end.dateTime];
     const data: MeetingForm = { datetime: new Date(), period: '15', room: roomName, timeslot: time };

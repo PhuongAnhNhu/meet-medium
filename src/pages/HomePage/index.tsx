@@ -28,8 +28,10 @@ const Homepage = () => {
   const data = getRoomListDashboard(roomInBerlin, meetingTimeSuggestion);
   const period = '15';
 
-  const bookingtime = (data: MeetingForm) => {
-    dispatch(createEvent(data));
+  const bookingtime = (bookingdata: MeetingForm) => {
+    dispatch(createEvent(bookingdata));
+    // console.log('BOOKING', bookingdata);
+    // console.log('DATA', data);
   };
 
   useEffect(() => {
