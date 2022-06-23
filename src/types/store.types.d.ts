@@ -100,6 +100,7 @@ interface roomWithTimeslot {
   name: string;
   address: string;
   timeslot: TimeSlotsItem[];
+  bookingData: (data: any) => void;
 }
 
 interface MeetingForm {

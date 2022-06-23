@@ -7,6 +7,7 @@ import RoomCard from '../../components/RoomCard';
 import { roomFilter } from '../../helper/roomFilter';
 import { getRoomListDashboard } from 'helper/dashboardData';
 import { fetchUserProfile } from 'store/features/userSlice';
+import { createEvent } from 'store/features/roomSlice';
 
 const datetime = new Date();
 const Homepage = () => {
@@ -26,6 +27,10 @@ const Homepage = () => {
   const roomInBerlin = roomFilter(roomList);
   const data = getRoomListDashboard(roomInBerlin, meetingTimeSuggestion);
   const period = '15';
+
+  const bookingtime = (data: MeetingForm) => {
+    dispatch(createEvent(data));
+  };
 
   useEffect(() => {
     accessToken && dispatch(fetchUserProfile(accessToken));
@@ -50,7 +55,7 @@ const Homepage = () => {
       <Grid container rowSpacing={2} columnSpacing={{ sm: 2, md: 1 }}>
         {data.map((room: any) => (
           <Grid key={room.name} item xs={10} sm={6} md={4}>
-            <RoomCard name={room.name} address={room.address} timeslot={room.timeslot} />
+            <RoomCard name={room.name} address={room.address} bookingData={bookingtime} timeslot={room.timeslot} />
           </Grid>
         ))}
       </Grid>
