@@ -2,25 +2,24 @@ import { Card, CardContent, CardHeader, Chip, Divider, Typography } from '@mui/m
 import { addHours, format } from 'date-fns';
 import { getRoomName } from 'helper/getRoomName';
 import React from 'react';
-import { useAppDispatch } from 'store';
-import { createEvent } from 'store/features/roomSlice';
 
 const TIME_FORMAT = 'HH:mm';
 
-const RoomCard = ({ name, timeslot }: roomWithTimeslot) => {
-  const dispatch = useAppDispatch();
+const RoomCard = ({ name, timeslot, bookingData }: roomWithTimeslot) => {
   const roomName = getRoomName(name);
-
+  // console.log(name);
+  // kann  Address Room von Homepage per props holen -> brauche in createEvent kein address suchen
   const handleClick = (item: TimeSlotsItem) => {
     const time = [item.start.dateTime, item.end.dateTime];
-    const data = { datetime: new Date(), pariod: '15', room: roomName, timeslot: time };
-    dispatch(createEvent(data));
+    const data: MeetingForm = { datetime: new Date(), period: '15', room: roomName, timeslot: time };
+    bookingData(data);
   };
+
   return (
     <Card>
-      <CardHeader title={name} sx={{ backgroundColor: 'primary.main', maxHeight: 30, minHeight: 30 }}></CardHeader>
+      <CardHeader title={name} sx={{ backgroundColor: 'primary.main', maxHeight: 40, minHeight: 35 }}></CardHeader>
       <Divider />
-      <CardContent sx={{ height: 57 }}>
+      <CardContent sx={{ height: 65 }}>
         {timeslot.length === 0 && <Typography>Ausgebucht</Typography>}
 
         {timeslot.map((item, index) => {

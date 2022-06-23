@@ -30,6 +30,8 @@ interface TimeSlotsItem {
 interface FindMeetingsTimePayload {
   datetime: Date;
   period: string;
+  accessToken: string;
+  userMail: string;
 }
 
 interface FindMeetingsTimeRequestPayload {
@@ -98,6 +100,7 @@ interface roomWithTimeslot {
   name: string;
   address: string;
   timeslot: TimeSlotsItem[];
+  bookingData: (data: any) => void;
 }
 
 interface MeetingForm {
@@ -105,4 +108,5 @@ interface MeetingForm {
   period?: string;
   room?: string;
   timeslot?: string[];
+  // address: string;
 }

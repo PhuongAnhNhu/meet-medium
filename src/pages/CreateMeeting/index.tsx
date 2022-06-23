@@ -30,7 +30,10 @@ const CreateMeeting = () => {
     period: '',
     room: '',
     timeslot: [],
+    // address: ''
+    //roomadresse soll auch mit schicken
   };
+  //check ob room address von state holen kann? damit in createevent kein roomadress finden mussen
 
   const [formState, setFormState] = useState<MeetingForm>(initialFormState);
   const [roomOptions, setRoomOptions] = useState<string[]>([]);
@@ -39,11 +42,14 @@ const CreateMeeting = () => {
 
   const { creating, created } = useSelector((state: RootState) => state.room);
 
+  const accessToken = localStorage.getItem('meetmediumToken');
+
+  const userMail = useSelector((state: RootState) => state.user.userProfile?.mail);
   /**
    * Only used to get the timeOptions and the roomOptions
    */
   const allMeetingData = useSelector((state: RootState) => state.room.meetingTimeSuggestion);
-
+  console.log('CREATE ALLMEETINGDATA', allMeetingData); // gibt auch roomadresse zurück
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -70,8 +76,8 @@ const CreateMeeting = () => {
   const handleChangePeriod = (event: React.ChangeEvent<HTMLInputElement>) => {
     const period = event.target.value;
     setFormState((currentFormState) => ({ ...currentFormState, period, room: '' }));
-    if (period) {
-      dispatch(findMeetingsTime({ datetime: formState.datetime, period }));
+    if (period && accessToken && userMail) {
+      dispatch(findMeetingsTime({ datetime: formState.datetime, period, accessToken, userMail }));
     }
     if (!period) {
       setTimeOptions([]);
