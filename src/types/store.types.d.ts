@@ -11,7 +11,7 @@ interface AttendeeBase {
   emailAddress: { address: string };
 }
 interface LocationConstraintItem {
-  resolveAvailability: boolean;
+  resolveAvailability?: boolean;
   displayName: string;
   locationEmailAddress: string;
 }
@@ -37,15 +37,15 @@ interface FindMeetingsTimePayload {
 interface FindMeetingsTimeRequestPayload {
   attendees: AttendeeBase[];
   locationConstraint: {
-    isRequired: boolean;
-    suggestLocation: boolean;
+    isRequired?: boolean;
+    suggestLocation?: boolean;
     locations: LocationConstraintItem[];
   };
   timeConstraint: {
-    activityDomain: string;
+    activityDomain?: string;
     timeSlots: TimeSlotsItem[];
   };
-  isOrganizerOptional: boolean;
+  isOrganizerOptional?: boolean;
   meetingDuration: string;
   returnSuggestionReasons: boolean;
   minimumAttendeePercentage: number;
