@@ -8,6 +8,9 @@ import { useMsal } from '@azure/msal-react';
 const LoginPage = () => {
   const { instance } = useMsal();
 
+  /**
+   * Renders a button which, when selected, will open a popup for login
+   */
   return (
     <Box sx={{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <Card sx={{ maxWidth: 400, height: 300 }}>
@@ -18,6 +21,7 @@ const LoginPage = () => {
           sx={{ height: '80%', display: 'flex', flexFlow: 'column', justifyContent: 'center', alignItems: 'center' }}
         >
           <CardContent>
+            {/* loginRedirect  or loginPopup*/}
             <LoginButton
               onLogin={() =>
                 instance.loginPopup(loginRequest).catch((e) => {

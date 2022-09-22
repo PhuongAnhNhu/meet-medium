@@ -1,7 +1,7 @@
 import { format, addHours } from 'date-fns';
 
 export const findMeetingsTimePayload = (datum: Date, period: string, userEmail: string) => {
-  const startTime = format(addHours(datum, 0), "yyyy-MM-dd'T'HH:mm:ss");
+  const startTime = format(addHours(datum, 1), "yyyy-MM-dd'T'HH:mm:ss");
   const endTime = format(addHours(datum, 8), "yyyy-MM-dd'T'HH:mm:ss");
 
   const meetingDurationMin = Number(period) % 60;

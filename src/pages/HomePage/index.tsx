@@ -26,7 +26,7 @@ const Homepage = () => {
 
   const roomInBerlin = roomFilter(roomList);
   const data = getRoomListDashboard(roomInBerlin, meetingTimeSuggestion);
-  const period = '10';
+  const period = '20';
 
   const bookingtime = (bookingdata: MeetingForm) => {
     dispatch(createEvent(bookingdata));
