@@ -1,9 +1,12 @@
+const { REACT_APP_AUTHORITY, REACT_APP_CLIENT_ID, REACT_APP_LOCAL_HOST, REACT_APP_LOCAL_HOST_URL, NODE_ENV } =
+  process.env;
 export const msalConfig = {
   auth: {
-    clientId: '39fa234e-c52f-46e0-8846-2fcab179df08',
-    authority: 'https://login.microsoftonline.com/0b3fc178-b730-4e8b-9843-e81259237b77', // This is a URL (e.g. https://login.microsoftonline.com/{your tenant ID})
-    redirectUri:
-      process.env.NODE_ENV === 'production' ? 'https://meetmedium.test7.exozet.com' : 'http://localhost:3000',
+    // clientId from Azure
+    clientId: REACT_APP_CLIENT_ID || '',
+    // This is a URL (e.g. https://login.microsoftonline.com/{your tenant ID})
+    authority: REACT_APP_AUTHORITY,
+    redirectUri: NODE_ENV === 'production' ? REACT_APP_LOCAL_HOST : REACT_APP_LOCAL_HOST_URL,
   },
   cache: {
     cacheLocation: 'sessionStorage', // This configures where your cache will be stored
@@ -16,7 +19,7 @@ export const loginRequest = {
   scopes: ['User.ReadBasic.All', 'Calendars.Read.Shared', 'Calendars.ReadWrite.Shared', 'Calendars.ReadWrite'],
 };
 
-// Add the endpoints here for Microsoft Graph API services you'd like to use.
+// The endpoints here for Microsoft Graph API services used for App.
 export const graphConfig = {
   graphMeEndpoint: 'https://graph.microsoft.com/v1.0/me',
   roomsEndpoint: 'https://graph.microsoft.com/beta/me/findRooms',

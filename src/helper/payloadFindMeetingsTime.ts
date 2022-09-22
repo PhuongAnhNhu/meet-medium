@@ -1,8 +1,8 @@
 import { format, addHours } from 'date-fns';
 
 export const findMeetingsTimePayload = (datum: Date, period: string, userEmail: string) => {
-  const startTime = format(addHours(datum, 2), "yyyy-MM-dd'T'HH:mm:ss");
-  const endTime = format(addHours(datum, 10), "yyyy-MM-dd'T'HH:mm:ss");
+  const startTime = format(addHours(datum, 1), "yyyy-MM-dd'T'HH:mm:ss");
+  const endTime = format(addHours(datum, 8), "yyyy-MM-dd'T'HH:mm:ss");
 
   const meetingDurationMin = Number(period) % 60;
   const meetingDurationHour = (Number(period) - meetingDurationMin) / 60;
@@ -45,22 +45,22 @@ export const findMeetingsTimePayload = (datum: Date, period: string, userEmail: 
           locationEmailAddress: 'Berlin-707Moskau@endava.com',
         },
         {
-          resolveAvailability: false,
+          resolveAvailability: true,
           displayName: 'VRLab',
           locationEmailAddress: 'Berlin-708VRLab@endava.com',
         },
         {
-          resolveAvailability: false,
+          resolveAvailability: true,
           displayName: 'XboxTokio',
           locationEmailAddress: 'Berlin-709XboxTokio@endava.com',
         },
         {
-          resolveAvailability: false,
+          resolveAvailability: true,
           displayName: 'XboxMadrid',
           locationEmailAddress: 'Berlin-710XboxMadrid@endava.com',
         },
         {
-          resolveAvailability: false,
+          resolveAvailability: true,
           displayName: 'XboxGothamCity',
           locationEmailAddress: 'Berlin-711XboxGothamCity@endava.com',
         },
